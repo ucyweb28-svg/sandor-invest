@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sandor Investments Management — Independent licensed wealth management firm in Israel. Local and international expertise from Herzliya." />
+  <title>Sandor Investments Management — Gestion de Patrimoine à Herzliya</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+
+  <!-- Calendly Widget -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen:    '#F2E9DC',
+            bordeaux: '#3E000F',
+            citron:   '#CFD11A',
+            olive:    '#808F85',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:  ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── Base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #3E000F;
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* ─── Scrollbar ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #F2E9DC; }
+    ::-webkit-scrollbar-thumb { background: #3E000F; border-radius: 2px; }
+
+    /* ─── Typography ────────────────────────────────────────── */
+    .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* ─── Nav underline (desktop) ───────────────────────────── */
+    .nav-link {
+      position: relative;
+      font-size: 0.6875rem;        /* 11px */
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(62, 0, 15, 0.55);
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+    .nav-link:hover { color: #3E000F; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: #CFD11A;
+      transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── Full-screen Luxe Menu ─────────────────────────────── */
+    #mobile-menu-fs {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+
+      /* Fond opaque bordeaux profond + micro-texture radiale */
+      background-color: #31000B;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 15% 110%, rgba(207,209,26,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% -10%, rgba(255,255,255,0.03) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-blend-mode: normal, normal, overlay;
+
+      /* Animation : fade-in + léger zoom */
+      opacity: 0;
+      transform: scale(0.97);
+      pointer-events: none;
+      transition:
+        opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #mobile-menu-fs.open {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: all;
+    }
+
+    /* Lien de navigation principal */
+    .fs-nav-link {
+      display: block;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(242, 233, 220, 0.82); /* crème off-white */
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: color 0.25s ease, letter-spacing 0.25s ease;
+      position: relative;
+    }
+    .fs-nav-link::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem; top: 50%;
+      transform: translateY(-50%) scaleX(0);
+      width: 14px; height: 1px;
+      background: #CFD11A;
+      transition: transform 0.25s ease;
+      transform-origin: left center;
+    }
+    .fs-nav-link:hover {
+      color: #F2E9DC;
+      letter-spacing: 0.18em;
+    }
+    .fs-nav-link:hover::before { transform: translateY(-50%) scaleX(1); }
+
+    /* Bouton langue */
+    .lang-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(242, 233, 220, 0.4);
+      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .lang-btn:hover,
+    .lang-btn.active {
+      color: #F2E9DC;
+      border-color: rgba(207,209,26,0.5);
+      background: rgba(207,209,26,0.06);
+    }
+
+    /* Stagger animation des liens */
+    #mobile-menu-fs.open .fs-nav-link {
+      animation: linkReveal 0.5s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    #mobile-menu-fs.open .fs-nav-link:nth-child(1) { animation-delay: 0.10s; }
+    #mobile-menu-fs.open .fs-nav-link:nth-child(2) { animation-delay: 0.17s; }
+    #mobile-menu-fs.open .fs-nav-link:nth-child(3) { animation-delay: 0.24s; }
+    #mobile-menu-fs.open .fs-nav-link:nth-child(4) { animation-delay: 0.31s; }
+    #mobile-menu-fs.open .fs-nav-link:nth-child(5) { animation-delay: 0.38s; }
+    #mobile-menu-fs.open .fs-nav-link:nth-child(6) { animation-delay: 0.45s; }
+    @keyframes linkReveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Scroll reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Tab system ────────────────────────────────────────── */
+    .tab-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      border-radius: 9999px;
+      transition: all 0.25s;
+      color: #808F85;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: #3E000F; border-color: rgba(62,0,15,0.15); }
+    .tab-btn.active { color: #ffffff; background: #3E000F; border-color: #3E000F; }
+
+
+    /* ─── Tab buttons — dark bg variant (Expertises bordeaux) ───── */
+    .tab-btn-dark {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      border-radius: 9999px;
+      transition: all 0.25s;
+      color: rgba(242,233,220,0.55);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.14);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab-btn-dark:hover { color: #F2E9DC; border-color: rgba(207,209,26,0.4); }
+    .tab-btn-dark.active { color: #3E000F; background: #CFD11A; border-color: #CFD11A; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ─── Form fields ────────────────────────────────────────── */
+    .form-field {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(62,0,15,0.2);
+      padding: 0.85rem 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #3E000F;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .form-field::placeholder { color: #808F85; }
+    .form-field:focus { border-bottom-color: #3E000F; }
+
+    /* ─── Stat divider ──────────────────────────────────────── */
+    .stat-divider {
+      width: 28px; height: 1px;
+      background: #CFD11A;
+      margin-bottom: 1rem;
+    }
+
+    /* ─── Hero image overlay ────────────────────────────────── */
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1.25rem;
+      background: linear-gradient(135deg, rgba(62,0,15,0.1) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ─── Grain overlay ─────────────────────────────────────── */
+    .grain-overlay {
+      position: fixed; inset: 0; z-index: 999; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.018;
+    }
+
+    /* ─── Language Switcher ─────────────────────────────────── */
+    .lang-sw {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      transition: color 0.2s, background 0.2s;
+    }
+    .lang-sw.active { color: #3E000F; background: rgba(62,0,15,0.07); }
+    .lang-sw.inactive { color: rgba(62,0,15,0.35); }
+    /* dark context (mobile menu) */
+    .lang-sw-dark.active { color: #F2E9DC; background: rgba(207,209,26,0.12); border-color: rgba(207,209,26,0.5); }
+    .lang-sw-dark.inactive { color: rgba(242,233,220,0.3); }
+    /* ─── Mobile touch targets ──────────────────────────────── */
+    @media (max-width: 767px) {
+      .tab-btn { font-size: 0.65rem; padding: 0.5rem 0.9rem; }
+      .tab-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tab-scroll::-webkit-scrollbar { display: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-bordeaux">
+
+  <!-- Grain overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MENU MOBILE FULL-SCREEN LUXE
+  ══════════════════════════════════════════════════════════ -->
+  <div id="mobile-menu-fs" role="dialog" aria-label="Menu de navigation" aria-modal="true" aria-hidden="true">
+
+    <!-- ── Barre supérieure ─────────────────────────────────── -->
+    <div class="flex items-center justify-between px-7 sm:px-10 pt-6 pb-5 flex-shrink-0">
+      <!-- Logo version claire -->
+      <a href="#accueil" id="fs-logo-link" class="flex items-center">
+        <img src="assets/logo.png" alt="Sandor Investments" class="h-10 w-auto object-contain brightness-0 invert opacity-90" />
+      </a>
+      <!-- Bouton fermeture doré -->
+      <button id="fs-close-btn"
+        class="flex items-center justify-center w-9 h-9 rounded-full border border-[#CFD11A]/30 text-[#CFD11A] transition-all duration-200 hover:bg-[#CFD11A]/10 hover:border-[#CFD11A]/70"
+        aria-label="Fermer le menu">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Ligne de séparation -->
+    <div class="mx-7 sm:mx-10 border-t border-white/8 flex-shrink-0"></div>
+
+    <!-- ── Navigation centrale ──────────────────────────────── -->
+    <nav class="flex-1 flex flex-col justify-center px-7 sm:px-10 py-6 overflow-y-auto">
+      <a href="#accueil"    class="fs-nav-link" data-i18n="nav.home">Home</a>
+      <a href="#expertises" class="fs-nav-link" data-i18n="nav.expertise">Expertise</a>
+      <a href="#vision"     class="fs-nav-link" data-i18n="nav.vision">Our Vision</a>
+      <a href="#equipe"     class="fs-nav-link" data-i18n="nav.team">The Team</a>
+      <a href="#actualites" class="fs-nav-link" data-i18n="nav.news">News</a>
+      <a href="#contact"    class="fs-nav-link" style="border-bottom:none;" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <!-- Ligne de séparation -->
+    <div class="mx-7 sm:mx-10 border-t border-white/8 flex-shrink-0"></div>
+
+    <!-- ── Pied du menu ──────────────────────────────────────── -->
+    <div class="px-7 sm:px-10 pt-6 pb-8 sm:pb-10 flex-shrink-0 space-y-5">
+
+      <!-- Sélecteur de langue -->
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-medium tracking-widest uppercase text-white/25 mr-1" style="font-family:'Inter',sans-serif;">Langue</span>
+        <button onclick="switchLanguage('fr')" id="lang-fr-m" class="lang-sw lang-sw-dark active px-3 py-1.5 rounded border border-transparent" aria-label="Français">FR</button>
+        <span class="text-white/15 text-xs">|</span>
+        <button onclick="switchLanguage('en')" id="lang-en-m" class="lang-sw lang-sw-dark inactive px-3 py-1.5 rounded border border-transparent" aria-label="English">EN</button>
+      </div>
+
+      <!-- CTA Client Portal -->
+      <a href="#contact"
+        id="fs-cta-link"
+        class="group flex items-center justify-between w-full px-5 py-4 border border-[#CFD11A]/40 rounded-sm transition-all duration-300 hover:bg-[#CFD11A]/8 hover:border-[#CFD11A]/80">
+        <div class="flex items-center gap-3">
+          <!-- Icône boussole dorée -->
+          <i data-lucide="compass" class="w-4 h-4 text-[#CFD11A] flex-shrink-0"></i>
+          <span style="font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(242,233,220,0.75);" class="transition-colors group-hover:text-[#F2E9DC]">
+            <span data-i18n="menu.espace">Client Portal</span>
+          </span>
+        </div>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[#CFD11A]/60 group-hover:text-[#CFD11A] group-hover:translate-x-1 transition-all duration-200"></i>
+      </a>
+
+      <!-- Adresse discrète -->
+      <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.06em;color:rgba(255,255,255,0.2);line-height:1.7;">
+        Herzliya, Israël &nbsp;·&nbsp; +972 72-245-2080
+      </p>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVIGATION HEADER — PREMIUM AÉRÉ
+  ══════════════════════════════════════════════════════════ -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+          style="background: rgba(255,255,255,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- Ligne de séparation bas ultra-fine, invisible au repos -->
+      <div id="navbar-rule" class="absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 opacity-0"
+           style="background: linear-gradient(to right, transparent, rgba(62,0,15,0.08) 20%, rgba(62,0,15,0.08) 80%, transparent);"></div>
+
+      <div class="flex items-center justify-between h-[84px]">
+
+        <!-- ── Logo ─────────────────────────────────────────── -->
+        <a href="#accueil" class="flex items-center flex-shrink-0 group" style="margin-left: -6px;">
+          <img src="assets/logo.png" alt="Sandor Investments"
+               class="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80" />
+        </a>
+
+        <!-- ── Navigation desktop (lg+) ─────────────────────── -->
+        <nav class="hidden lg:flex items-center" style="gap: 2.5rem;">
+          <a href="#accueil"    class="nav-link" data-i18n="nav.home">Home</a>
+          <a href="#expertises" class="nav-link" data-i18n="nav.expertise">Expertise</a>
+          <a href="#vision"     class="nav-link" data-i18n="nav.vision">Our Vision</a>
+          <a href="#equipe"     class="nav-link" data-i18n="nav.team">The Team</a>
+          <a href="#actualites" class="nav-link" data-i18n="nav.news">News</a>
+          <a href="#contact"    class="nav-link" data-i18n="nav.contact">Contact</a>
+        </nav>
+
+        <!-- ── Droite : langue + CTA + burger ───────────────── -->
+        <div class="flex items-center" style="gap: 1.25rem;">
+
+          <!-- Sélecteur de langue desktop -->
+          <div class="hidden lg:flex items-center flex-shrink-0" style="gap: 0.2rem; margin-right: 0.25rem;">
+            <button onclick="switchLanguage('fr')" id="lang-fr-d"
+                    class="lang-sw active"
+                    style="font-size:0.6rem; letter-spacing:0.18em; padding:0.3rem 0.55rem;"
+                    aria-label="Français">FR</button>
+            <span style="color:rgba(62,0,15,0.18); font-size:0.65rem; user-select:none; line-height:1;">|</span>
+            <button onclick="switchLanguage('en')" id="lang-en-d"
+                    class="lang-sw inactive"
+                    style="font-size:0.6rem; letter-spacing:0.18em; padding:0.3rem 0.55rem;"
+                    aria-label="English">EN</button>
+          </div>
+
+          <a href="#" id="calendly-trigger-nav" onclick="openCalendly(event)"
+             class="hidden lg:inline-flex items-center whitespace-nowrap flex-shrink-0 transition-all duration-300 hover:text-white"
+             style="font-family:'Inter',sans-serif;
+                    font-size: 0.625rem;
+                    font-weight: 500;
+                    letter-spacing: 0.18em;
+                    text-transform: uppercase;
+                    color: #3E000F;
+                    border: 0.5px solid rgba(62,0,15,0.35);
+                    padding: 0.7rem 1.6rem;
+                    border-radius: 9999px;
+                    transition: background 0.3s, color 0.3s, border-color 0.3s;"
+             onmouseover="this.style.background='#3E000F'; this.style.color='#fff'; this.style.borderColor='#3E000F';"
+             onmouseout="this.style.background=''; this.style.color='#3E000F'; this.style.borderColor='rgba(62,0,15,0.35)';"
+             data-i18n="nav.cta">
+            Book a Meeting
+          </a>
+
+          <!-- Burger (mobile / tablette) -->
+          <button id="burger-btn"
+                  class="lg:hidden flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                  style="width:2.25rem; height:2.25rem; border-radius:9999px; border:0.5px solid rgba(62,0,15,0.25); color:#3E000F;"
+                  aria-label="Ouvrir le menu">
+            <i data-lucide="menu" class="w-4 h-4"></i>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════════════════ -->
+    <section id="accueil" class="pt-32 md:pt-44 pb-16 md:pb-28 px-6 lg:px-8 bg-white">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Eyebrow -->
+        <div class="reveal flex items-center gap-3 mb-7 md:mb-10">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="hero.eyebrow">Licensed Firm · Herzliya, Israel</span>
+        </div>
+
+        <!-- Mobile: Image FIRST, then text. Desktop: side by side -->
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+
+          <!-- IMAGE — top on mobile, right on desktop -->
+          <div class="reveal order-1 lg:order-2 mb-10 lg:mb-0 relative" style="transition-delay:0.15s">
+            <div class="hero-img-wrap relative overflow-hidden rounded-2xl lg:rounded-3xl shadow-lg lg:shadow-xl">
+              <img
+                src="assets/hero.webp"
+                alt="Sandor Investments Management — Vue de Herzliya"
+                class="w-full h-64 sm:h-80 md:h-[420px] lg:h-[540px] object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </div>
+            <!-- Floating badge — hidden on small mobile, shown md+ -->
+            <div class="hidden md:block absolute -bottom-5 -left-4 lg:-bottom-6 lg:-left-6 bg-linen border border-bordeaux/10 rounded-xl px-5 py-4 shadow-sm">
+              <p class="text-xs font-medium tracking-widest uppercase text-olive mb-1">Total independence</p>
+              <p class="font-display text-lg lg:text-xl font-light text-bordeaux">No conflict of interest</p>
+            </div>
+          </div>
+
+          <!-- TEXT — bottom on mobile, left on desktop -->
+          <div class="order-2 lg:order-1">
+            <span class="reveal block text-xs font-medium tracking-widest uppercase text-bordeaux/50 mb-4" style="transition-delay:0.05s" data-i18n="hero.badge">Licensed Firm in Israel</span>
+            <h1 class="reveal font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem] leading-[1.08] font-light text-bordeaux mb-6 md:mb-8" style="transition-delay:0.1s" data-i18n-html="hero.title">
+              Excellence in wealth<br />
+              <em class="font-light">management</em> in Herzliya.
+            </h1>
+
+            <p class="reveal text-base font-light leading-relaxed text-bordeaux/70 mb-8 md:mb-12 max-w-md" style="transition-delay:0.2s" data-i18n="hero.subtitle">
+              An independent, fully licensed expert in Israel. We build, optimise and protect your local and international financial assets with absolute discretion and bespoke precision.
+            </p>
+
+            <div class="reveal flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4" style="transition-delay:0.3s">
+              <a href="#" id="calendly-trigger-hero" onclick="openCalendly(event)" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-bordeaux text-white text-sm font-medium tracking-wide rounded-full transition-all duration-250 hover:bg-bordeaux/85">
+                <span data-i18n="hero.cta1">Request a Private Audit</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 flex-shrink-0"></i>
+              </a>
+              <a href="#expertises" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-sm font-medium tracking-wide text-bordeaux rounded-full border border-bordeaux/25 transition-all duration-250 hover:border-bordeaux/60">
+                <span data-i18n="hero.cta2">Discover our expertise</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Trust bar -->
+        <div class="reveal mt-16 md:mt-24 pt-10 md:pt-10 border-t border-bordeaux/10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8" style="transition-delay:0.4s">
+          <div>
+            <p class="font-display text-3xl md:text-4xl font-light text-bordeaux mb-1">15+</p>
+            <p class="text-xs font-medium tracking-wide uppercase text-olive leading-snug" data-i18n="hero.stat1.label">Years of experience</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl md:text-4xl font-light text-bordeaux mb-1">100%</p>
+            <p class="text-xs font-medium tracking-wide uppercase text-olive leading-snug" data-i18n="hero.stat2.label">Independent advisory</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl md:text-4xl font-light text-bordeaux mb-1">3</p>
+            <p class="text-xs font-medium tracking-wide uppercase text-olive leading-snug" data-i18n="hero.stat3.label">Continents covered</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl md:text-4xl font-light text-bordeaux mb-1" data-i18n="hero.stat4.value">Licensed</p>
+            <p class="text-xs font-medium tracking-wide uppercase text-olive leading-snug" data-i18n="hero.stat4.label">Regulated in Israel</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         OUR SERVICES & APPROACH
+    ══════════════════════════════════════════════════════ -->
+    <section id="services" class="py-16 md:py-28 lg:py-32 px-6 lg:px-8 bg-linen">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Section header -->
+        <div class="reveal flex items-center gap-3 mb-5">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="svc.eyebrow">What We Offer</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14 md:mb-20">
+          <h2 class="reveal font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bordeaux leading-[1.08]" style="transition-delay:0.1s" data-i18n-html="svc.title">
+            Services &amp; <em>Approach.</em>
+          </h2>
+          <p class="reveal text-sm font-light leading-relaxed text-bordeaux/60 max-w-sm" style="transition-delay:0.15s" data-i18n="svc.subtitle">
+            A comprehensive, independent framework built around your objectives — locally grounded, globally minded.
+          </p>
+        </div>
+
+        <!-- 3-column grid: 1 col mobile → 3 col lg -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
+
+          <!-- Card 1: Our Services -->
+          <div class="reveal group" style="transition-delay:0.05s">
+            <div class="h-full bg-white rounded-2xl p-8 lg:p-10 flex flex-col border-t-2 border-citron transition-shadow duration-300 group-hover:shadow-lg">
+              <div class="flex items-center justify-center w-11 h-11 rounded-full bg-bordeaux/6 mb-7 flex-shrink-0">
+                <i data-lucide="bar-chart-2" class="w-5 h-5 text-olive"></i>
+              </div>
+              <h3 class="font-display text-2xl lg:text-3xl font-light text-bordeaux mb-4 leading-snug" data-i18n="svc.c1.title">Our Services</h3>
+              <div class="w-6 h-px bg-citron mb-5"></div>
+              <p class="text-sm font-light leading-[1.9] text-bordeaux/65 flex-grow" data-i18n="svc.c1.body">
+                Sandor Investments Management offers proactive financial asset management, including portfolio management, diversification and protection. We focus on transparency and excellence to achieve your financial goals.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: Our Approach -->
+          <div class="reveal group" style="transition-delay:0.12s">
+            <div class="h-full bg-white rounded-2xl p-8 lg:p-10 flex flex-col border-t-2 border-bordeaux/20 transition-shadow duration-300 group-hover:shadow-lg">
+              <div class="flex items-center justify-center w-11 h-11 rounded-full bg-bordeaux/6 mb-7 flex-shrink-0">
+                <i data-lucide="users" class="w-5 h-5 text-olive"></i>
+              </div>
+              <h3 class="font-display text-2xl lg:text-3xl font-light text-bordeaux mb-4 leading-snug" data-i18n="svc.c2.title">Our Approach</h3>
+              <div class="w-6 h-px bg-citron mb-5"></div>
+              <p class="text-sm font-light leading-[1.9] text-bordeaux/65 flex-grow" data-i18n="svc.c2.body">
+                Our team of experts works closely with each customer to understand their financial needs and objectives, offering tailored advice and solutions for retirement, wealth and estate planning.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3: Our Risk Management -->
+          <div class="reveal group" style="transition-delay:0.20s">
+            <div class="h-full bg-white rounded-2xl p-8 lg:p-10 flex flex-col border-t-2 border-bordeaux/20 transition-shadow duration-300 group-hover:shadow-lg">
+              <div class="flex items-center justify-center w-11 h-11 rounded-full bg-bordeaux/6 mb-7 flex-shrink-0">
+                <i data-lucide="shield" class="w-5 h-5 text-olive"></i>
+              </div>
+              <h3 class="font-display text-2xl lg:text-3xl font-light text-bordeaux mb-4 leading-snug" data-i18n="svc.c3.title">Our Risk Management</h3>
+              <div class="w-6 h-px bg-citron mb-5"></div>
+              <p class="text-sm font-light leading-[1.9] text-bordeaux/65 flex-grow" data-i18n="svc.c3.body">
+                We manage our clients' financial risks with advanced analytical tools and diversification strategies, adapting our management to market conditions and individual needs.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         EXPERTISES (ONGLETS)
+    ══════════════════════════════════════════════════════ -->
+    <section id="expertises" class="py-16 md:py-28 lg:py-36 px-6 lg:px-8 bg-bordeaux">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Section header -->
+        <div class="reveal flex items-center gap-3 mb-5">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-white/50" data-i18n="exp.eyebrow">What we do</span>
+        </div>
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-0 lg:items-end mb-10 md:mb-16 gap-3">
+          <h2 class="reveal font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.1]" style="transition-delay:0.1s" data-i18n-html="exp.title">
+            Expertise <em>crafted</em><br />
+            to measure.
+          </h2>
+          <p class="reveal text-sm font-light leading-relaxed text-white/60 max-w-sm lg:ml-auto lg:text-right" style="transition-delay:0.2s" data-i18n="exp.subtitle">
+            Every wealth situation is unique. Our approach begins with in-depth listening, before any recommendation.
+          </p>
+        </div>
+
+        <!-- Main layout: stacked on mobile, side-by-side on lg -->
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-20 items-start gap-10">
+
+          <!-- Tab controls + content — FIRST on mobile -->
+          <div class="reveal order-1 lg:order-2 w-full" style="transition-delay:0.15s">
+
+            <!-- Scrollable tab buttons on mobile -->
+            <div class="tab-scroll flex gap-2 mb-0 pb-6 border-b border-white/12 -mx-1 px-1">
+              <button class="tab-btn-dark active flex-shrink-0" data-tab="patrimoine" data-i18n="exp.tab1">Wealth Management</button>
+              <button class="tab-btn-dark flex-shrink-0"   data-tab="entrepreneurs" data-i18n="exp.tab2">Entrepreneurs & Corporates</button>
+              <button class="tab-btn-dark flex-shrink-0"   data-tab="investissements" data-i18n="exp.tab3">Investment Strategies</button>
+            </div>
+
+            <!-- Tab panels -->
+            <div id="tab-patrimoine" class="tab-panel active pt-8">
+              <h3 class="font-display text-2xl md:text-3xl lg:text-4xl font-light text-white mb-4 leading-tight" data-i18n-html="tab1.title">
+                A comprehensive view<br />of your wealth.
+              </h3>
+              <p class="text-sm font-light leading-[1.85] text-white/65 mb-7" data-i18n="tab1.body">
+                We establish a complete wealth audit covering all your assets — real estate, financial, professional and family — to define a coherent, lasting strategy perfectly aligned with your life goals. From preservation to transmission, every decision is made with rigour and foresight.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab1.li1">360° wealth audit and personalised diagnosis</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab1.li2">Local (ישראלי) and international tax optimisation</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab1.li3">Estate engineering and succession planning</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab1.li4">Life insurance, contingency cover and risk management</span>
+                </li>
+              </ul>
+            </div>
+
+            <div id="tab-entrepreneurs" class="tab-panel pt-8">
+              <h3 class="font-display text-2xl md:text-3xl lg:text-4xl font-light text-white mb-4 leading-tight" data-i18n-html="tab2.title">
+                Expertise at the service<br />of builders.
+              </h3>
+              <p class="text-sm font-light leading-[1.85] text-white/65 mb-7" data-i18n="tab2.body">
+                Start-up founders, established CEOs, entrepreneurs at exit or sale stage: we structure your professional and personal wealth so that every stage of your growth is also an opportunity for consolidation. We anticipate the fiscal and capitalistic challenges specific to the Israeli market.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab2.li1">Wealth structuring during fundraising rounds or exits</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab2.li2">Management of stock-options and employee ownership plans (ESOP)</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab2.li3">Optimal separation of professional and personal assets</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab2.li4">Advisory on disposals, shareholder agreements and patrimonial holding</span>
+                </li>
+              </ul>
+            </div>
+
+            <div id="tab-investissements" class="tab-panel pt-8">
+              <h3 class="font-display text-2xl md:text-3xl lg:text-4xl font-light text-white mb-4 leading-tight" data-i18n-html="tab3.title">
+                Strong convictions,<br />precise execution.
+              </h3>
+              <p class="text-sm font-light leading-[1.85] text-white/65 mb-7" data-i18n="tab3.body">
+                No in-house products, no conflicts of interest. Our total independence allows us to select the best global investment opportunities — equities, fixed income, alternatives, private equity and real estate — building robust, diversified portfolios calibrated to your true risk profile.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab3.li1">Strategic and tactical multi-asset class allocation</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab3.li2">Rigorous selection of third-party funds and management mandates</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab3.li3">Access to private equity, real estate and alternative assets</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm font-light text-white/75">
+                  <i data-lucide="check" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                  <span data-i18n="tab3.li4">Consolidated reporting and transparent performance monitoring</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Image — SECOND on mobile (below tabs), left on desktop -->
+          <div class="reveal order-2 lg:order-1 w-full" style="transition-delay:0.1s">
+            <div class="relative overflow-hidden rounded-2xl lg:rounded-3xl shadow-lg lg:shadow-xl border-t-2 border-citron">
+              <img
+                src="assets/expertises.webp"
+                alt="Expertises Sandor Investments Management"
+                class="w-full h-64 sm:h-80 md:h-[420px] lg:aspect-[4/5] lg:h-auto object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div class="absolute top-5 right-5 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1.5">
+                <p class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="exp.badge">Bespoke</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         ENTREPRENEURS STRATEGY
+    ══════════════════════════════════════════════════════ -->
+    <section id="entrepreneurs" class="pt-16 pb-10 md:py-28 lg:py-36 px-6 lg:px-8 bg-white">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Section header -->
+        <div class="reveal flex items-center gap-3 mb-5">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="ent.eyebrow">For Entrepreneurs &amp; Business Leaders</span>
+        </div>
+
+        <!-- Title + intro -->
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-20 items-start mb-14 md:mb-20 gap-8">
+          <div>
+            <h2 class="reveal font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-bordeaux leading-[1.08]" style="transition-delay:0.1s" data-i18n-html="ent.title">
+              Your Expert Partner<br /><em>for Entrepreneurs.</em>
+            </h2>
+          </div>
+          <div class="reveal border-t-2 border-citron pt-7 lg:pt-8" style="transition-delay:0.15s">
+            <p class="text-sm font-light leading-[1.95] text-bordeaux/70" data-i18n="ent.subtitle">
+              At Sandor, we understand the unique challenges faced by entrepreneurs and business leaders. Your assets, both personal and professional, require a comprehensive, expert approach. We orchestrate a coherent strategy that encompasses your personal investments and your company shareholdings.
+            </p>
+          </div>
+        </div>
+
+        <!-- Two strategy blocks -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+
+          <!-- Block 1: Investment Strategies -->
+          <div class="reveal" style="transition-delay:0.08s">
+            <div class="h-full rounded-2xl overflow-hidden" style="background-color:#F9F5EF;">
+              <div class="p-8 lg:p-10">
+                <!-- Icon row -->
+                <div class="flex items-center gap-4 mb-7">
+                  <div class="flex items-center justify-center w-11 h-11 rounded-full flex-shrink-0" style="background:rgba(62,0,15,0.07);">
+                    <i data-lucide="trending-up" class="w-5 h-5 text-olive"></i>
+                  </div>
+                  <span class="block w-8 h-px bg-citron flex-shrink-0"></span>
+                </div>
+                <h3 class="font-display text-2xl lg:text-3xl font-light text-bordeaux mb-4 leading-snug" data-i18n="ent.s1.title">Investment Strategies</h3>
+                <div class="w-6 h-px bg-citron mb-6"></div>
+                <p class="text-sm font-light leading-[1.9] text-bordeaux/65" data-i18n="ent.s1.body">
+                  We aim for excellent returns with controlled risk, offering personalized service and tailor-made solutions. We define optimal investment opportunities and use a diversification strategy to achieve objectives, even in times of volatility.
+                </p>
+              </div>
+              <!-- Accent strip -->
+              <div class="h-1 w-full" style="background: linear-gradient(to right, #CFD11A, transparent);"></div>
+            </div>
+          </div>
+
+          <!-- Block 2: Management Strategies -->
+          <div class="reveal" style="transition-delay:0.16s">
+            <div class="h-full rounded-2xl overflow-hidden" style="background-color:#F9F5EF;">
+              <div class="p-8 lg:p-10">
+                <!-- Icon row -->
+                <div class="flex items-center gap-4 mb-7">
+                  <div class="flex items-center justify-center w-11 h-11 rounded-full flex-shrink-0" style="background:rgba(62,0,15,0.07);">
+                    <i data-lucide="sliders-horizontal" class="w-5 h-5 text-olive"></i>
+                  </div>
+                  <span class="block w-8 h-px bg-citron flex-shrink-0"></span>
+                </div>
+                <h3 class="font-display text-2xl lg:text-3xl font-light text-bordeaux mb-4 leading-snug" data-i18n="ent.s2.title">Management Strategies</h3>
+                <div class="w-6 h-px bg-citron mb-6"></div>
+                <p class="text-sm font-light leading-[1.9] text-bordeaux/65" data-i18n="ent.s2.body">
+                  Sandor Investments Management provides personalized advice based on a risk assessment tailored to preserve capital, respect the risk profile, and target expected returns. We adjust portfolio volatility according to client tolerance, and offer global diversification to optimize returns and efficiency.
+                </p>
+              </div>
+              <!-- Accent strip -->
+              <div class="h-1 w-full" style="background: linear-gradient(to right, #CFD11A, transparent);"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         NOTRE VISION & ÉQUIPE
+    ══════════════════════════════════════════════════════ -->
+    <section id="vision" class="pt-10 pb-16 md:py-28 lg:py-36 px-6 lg:px-8 bg-white">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Section header -->
+        <div class="reveal flex items-center gap-3 mb-5">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="vis.eyebrow">Our Vision & Our Team</span>
+        </div>
+
+        <!-- Stacked on mobile, side-by-side lg -->
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center mb-16 md:mb-24 gap-14 md:gap-12">
+
+          <!-- Image — first on mobile -->
+          <div class="reveal order-1 lg:order-2 relative" style="transition-delay:0.15s">
+            <div class="relative overflow-hidden rounded-2xl lg:rounded-3xl shadow-lg lg:shadow-xl">
+              <img
+                src="assets/vision.webp"
+                alt="Sandrine Aharon — Fondatrice, Sandor Investments Management"
+                class="w-full h-72 sm:h-96 md:h-[460px] lg:aspect-[3/4] lg:h-auto object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </div>
+            
+            <div class="flex items-center gap-4 mt-5 pl-1">
+              <span class="block w-5 h-px bg-citron flex-shrink-0"></span>
+              <div>
+                <p class="font-display text-lg font-light text-bordeaux leading-snug" data-i18n="vis.caption.name">Sandrine Aharon</p>
+                <p class="text-xs font-medium tracking-widest uppercase mt-0.5" style="color:#808F85; font-family:'Inter',sans-serif; letter-spacing:0.1em;" data-i18n="vis.caption.role">Founder &amp; Chief Executive Officer</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text — second on mobile, left on desktop -->
+          <div class="order-2 lg:order-1 border-t-2 border-citron pt-8 lg:pt-10">
+            <h2 class="reveal font-display text-3xl sm:text-4xl lg:text-5xl xl:text-[3.5rem] font-light text-bordeaux leading-[1.1] mb-7 md:mb-8" style="transition-delay:0.1s" data-i18n-html="vis.title">
+              Trust is earned,<br />
+              not merely <em>proclaimed.</em>
+            </h2>
+            <div class="reveal space-y-5 text-sm font-light leading-[1.9] text-bordeaux/70" style="transition-delay:0.2s">
+              <p>
+<span data-i18n-html="vis.p1">Sandor Investments Management is founded on a simple conviction: <strong class="font-medium text-bordeaux">you deserve advice that is accountable only to you.</strong> Not to banks, not to insurance companies, not to product issuers. To you alone.</span>
+              </p>
+              <p>
+<span data-i18n="vis.p2">Sandrine Aharon, founding CEO, built this firm after two decades at the heart of Israeli and international financial markets. Her vision: to reconcile the analytical rigour of institutional asset management with the warmth and proximity of a truly personal advisory relationship.</span>
+              </p>
+              <p>
+<span data-i18n="vis.p3">Our fees-only model — no product commissions — guarantees full transparency and absolute alignment of our interests with yours. This is the foundation of any wealth relationship worthy of the name.</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Stats — 1 col mobile, 3 col md+ -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-3 border-t border-bordeaux/10" style="transition-delay:0.3s">
+
+          <div class="pt-8 pb-8 md:pt-12 md:pr-12 border-b md:border-b-0 md:border-r border-bordeaux/10">
+            <div class="stat-divider"></div>
+            <div class="flex items-start gap-4">
+              <i data-lucide="shield-check" class="w-5 h-5 md:w-6 md:h-6 text-olive mt-1 flex-shrink-0"></i>
+              <div>
+                <p class="font-display text-xl md:text-2xl lg:text-3xl font-light text-bordeaux mb-2" data-i18n="vis.stat1.title">Regulated Financial Advisory in Israel</p>
+                <p class="text-sm font-light leading-relaxed text-bordeaux/65" data-i18n="vis.stat1.body">We are authorized and supervised by the Israeli financial regulatory authority, guaranteeing the highest standards of compliance and client protection.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 pb-8 md:pt-12 md:px-12 border-b md:border-b-0 md:border-r border-bordeaux/10">
+            <div class="stat-divider"></div>
+            <div class="flex items-start gap-4">
+              <i data-lucide="scale" class="w-5 h-5 md:w-6 md:h-6 text-olive mt-1 flex-shrink-0"></i>
+              <div>
+                <p class="font-display text-xl md:text-2xl lg:text-3xl font-light text-bordeaux mb-2" data-i18n="vis.stat2.title">100% Independent Solutions</p>
+                <p class="text-sm font-light leading-relaxed text-bordeaux/65" data-i18n="vis.stat2.body">No third-party remuneration, no in-house products. Every recommendation is dictated solely by your patrimonial interest, selected from the best solutions available on the market.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8 pb-8 md:pt-12 md:pl-12">
+            <div class="stat-divider"></div>
+            <div class="flex items-start gap-4">
+              <i data-lucide="fingerprint" class="w-5 h-5 md:w-6 md:h-6 text-olive mt-1 flex-shrink-0"></i>
+              <div>
+                <p class="font-display text-xl md:text-2xl lg:text-3xl font-light text-bordeaux mb-2" data-i18n="vis.stat3.title">Bespoke Approach</p>
+                <p class="text-sm font-light leading-relaxed text-bordeaux/65" data-i18n="vis.stat3.body">Your situation is unique. Your strategy is too. We refuse standardised solutions and build every wealth roadmap from rigorous listening and in-depth analysis.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         WEALTH TRANSFER & INNOVATION
+    ══════════════════════════════════════════════════════ -->
+    <section id="wealth-transfer" class="py-16 md:py-28 lg:py-36 px-6 lg:px-8 bg-bordeaux">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Main header -->
+        <div class="reveal flex items-center gap-3 mb-7">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-white/50" data-i18n="wt.eyebrow">Estate &amp; Succession Planning</span>
+        </div>
+
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-20 items-start mb-16 md:mb-24 gap-10">
+          <h2 class="reveal font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-white leading-[1.08]" style="transition-delay:0.1s" data-i18n-html="wt.title">
+            Facilitating The<br />Smooth Transfer<br /><em>of Wealth.</em>
+          </h2>
+          <p class="reveal text-sm font-light leading-[1.95] text-white/65 max-w-lg" style="transition-delay:0.18s" data-i18n="wt.body">
+            As individuals live longer lives, spanning several generations, the number of people making up an extended family can increase dramatically. Without meticulous and thorough planning, the transfer of an estate to the intended beneficiaries can become a potential minefield. Preventing the risk of this happening is one of the main reasons for families to use a wealth management office.
+          </p>
+        </div>
+
+        <!-- Advantages header -->
+        <div class="reveal mb-12 pt-10 border-t border-white/10" style="transition-delay:0.1s">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <span class="block w-6 h-px bg-citron flex-shrink-0"></span>
+            <p class="text-sm font-medium text-white/75" style="font-family:'Inter',sans-serif; letter-spacing:0.04em;">
+              <span data-i18n="wt.services.label">Our Innovative Services</span> &mdash;
+              <span class="text-white/45 font-light" data-i18n="wt.services.subtitle"> There are many other advantages to using the services of a wealth management office</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 6 pillars: 1 col mobile, 2 col sm, 3 col lg -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+          <!-- Pillar 1: Transparency -->
+          <div class="reveal group" style="transition-delay:0.05s">
+            <div class="h-full rounded-xl p-7 transition-all duration-300 group-hover:bg-white/6" style="border: 0.5px solid rgba(255,255,255,0.12);">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0" style="background:rgba(207,209,26,0.12); border: 0.5px solid rgba(207,209,26,0.3);">
+                  <i data-lucide="eye" class="w-4 h-4 text-citron"></i>
+                </div>
+                <span class="text-xs font-medium tracking-widest uppercase text-citron/80" style="font-family:'Inter',sans-serif;">01</span>
+              </div>
+              <h4 class="font-display text-xl lg:text-2xl font-light text-white mb-3 leading-snug" data-i18n="wt.p1.title">Transparency</h4>
+              <div class="w-5 h-px bg-citron/40 mb-4"></div>
+              <p class="text-xs font-light leading-[1.85] text-white/55" data-i18n="wt.p1.body">
+                Ensuring that systems are in place to reinforce trust and offer management perfectly adapted to each asset.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Harmonizing interests -->
+          <div class="reveal group" style="transition-delay:0.10s">
+            <div class="h-full rounded-xl p-7 transition-all duration-300 group-hover:bg-white/6" style="border: 0.5px solid rgba(255,255,255,0.12);">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0" style="background:rgba(207,209,26,0.12); border: 0.5px solid rgba(207,209,26,0.3);">
+                  <i data-lucide="git-merge" class="w-4 h-4 text-citron"></i>
+                </div>
+                <span class="text-xs font-medium tracking-widest uppercase text-citron/80" style="font-family:'Inter',sans-serif;">02</span>
+              </div>
+              <h4 class="font-display text-xl lg:text-2xl font-light text-white mb-3 leading-snug" data-i18n="wt.p2.title">Harmonizing Interests</h4>
+              <div class="w-5 h-px bg-citron/40 mb-4"></div>
+              <p class="text-xs font-light leading-[1.85] text-white/55" data-i18n="wt.p2.body">
+                The introduction of global asset management to harmonize income over the short and long term.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Higher yield potential -->
+          <div class="reveal group" style="transition-delay:0.15s">
+            <div class="h-full rounded-xl p-7 transition-all duration-300 group-hover:bg-white/6" style="border: 0.5px solid rgba(255,255,255,0.12);">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0" style="background:rgba(207,209,26,0.12); border: 0.5px solid rgba(207,209,26,0.3);">
+                  <i data-lucide="trending-up" class="w-4 h-4 text-citron"></i>
+                </div>
+                <span class="text-xs font-medium tracking-widest uppercase text-citron/80" style="font-family:'Inter',sans-serif;">03</span>
+              </div>
+              <h4 class="font-display text-xl lg:text-2xl font-light text-white mb-3 leading-snug" data-i18n="wt.p3.title">Higher Yield Potential</h4>
+              <div class="w-5 h-px bg-citron/40 mb-4"></div>
+              <p class="text-xs font-light leading-[1.85] text-white/55" data-i18n="wt.p3.body">
+                Having a single, centralized wealth management strategy tends to generate better returns and reduce risk.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 4: Separation of interests -->
+          <div class="reveal group" style="transition-delay:0.05s">
+            <div class="h-full rounded-xl p-7 transition-all duration-300 group-hover:bg-white/6" style="border: 0.5px solid rgba(255,255,255,0.12);">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0" style="background:rgba(207,209,26,0.12); border: 0.5px solid rgba(207,209,26,0.3);">
+                  <i data-lucide="split" class="w-4 h-4 text-citron"></i>
+                </div>
+                <span class="text-xs font-medium tracking-widest uppercase text-citron/80" style="font-family:'Inter',sans-serif;">04</span>
+              </div>
+              <h4 class="font-display text-xl lg:text-2xl font-light text-white mb-3 leading-snug" data-i18n="wt.p4.title">Separation of Interests</h4>
+              <div class="w-5 h-px bg-citron/40 mb-4"></div>
+              <p class="text-xs font-light leading-[1.85] text-white/55" data-i18n="wt.p4.body">
+                Separate personal family assets from the family business and savings or wealth.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 5: Risk centralization -->
+          <div class="reveal group" style="transition-delay:0.10s">
+            <div class="h-full rounded-xl p-7 transition-all duration-300 group-hover:bg-white/6" style="border: 0.5px solid rgba(255,255,255,0.12);">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0" style="background:rgba(207,209,26,0.12); border: 0.5px solid rgba(207,209,26,0.3);">
+                  <i data-lucide="radar" class="w-4 h-4 text-citron"></i>
+                </div>
+                <span class="text-xs font-medium tracking-widest uppercase text-citron/80" style="font-family:'Inter',sans-serif;">05</span>
+              </div>
+              <h4 class="font-display text-xl lg:text-2xl font-light text-white mb-3 leading-snug" data-i18n="wt.p5.title">Risk Centralization</h4>
+              <div class="w-5 h-px bg-citron/40 mb-4"></div>
+              <p class="text-xs font-light leading-[1.85] text-white/55" data-i18n="wt.p5.body">
+                An overview of family investments enables the management office to anticipate and minimize potential risks.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 6: Centralized service -->
+          <div class="reveal group" style="transition-delay:0.15s">
+            <div class="h-full rounded-xl p-7 transition-all duration-300 group-hover:bg-white/6" style="border: 0.5px solid rgba(255,255,255,0.12);">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0" style="background:rgba(207,209,26,0.12); border: 0.5px solid rgba(207,209,26,0.3);">
+                  <i data-lucide="contact" class="w-4 h-4 text-citron"></i>
+                </div>
+                <span class="text-xs font-medium tracking-widest uppercase text-citron/80" style="font-family:'Inter',sans-serif;">06</span>
+              </div>
+              <h4 class="font-display text-xl lg:text-2xl font-light text-white mb-3 leading-snug" data-i18n="wt.p6.title">Centralized Service</h4>
+              <div class="w-5 h-px bg-citron/40 mb-4"></div>
+              <p class="text-xs font-light leading-[1.85] text-white/55" data-i18n="wt.p6.body">
+                A single point of contact for all financial and asset related questions.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         ACTUALITÉS
+    ══════════════════════════════════════════════════════ -->
+    <section id="actualites" class="py-16 md:py-28 lg:py-36 px-6 lg:px-8 bg-linen">
+      <div class="max-w-7xl mx-auto">
+
+        <div class="reveal flex items-center gap-3 mb-5">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="news.eyebrow">Perspectives & Insights</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 md:mb-16">
+          <h2 class="reveal font-display text-3xl sm:text-4xl md:text-5xl font-light text-bordeaux leading-[1.1]" style="transition-delay:0.1s" data-i18n-html="news.title">
+            Our latest <em>publications.</em>
+          </h2>
+          <a href="#" class="reveal inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-olive hover:text-bordeaux transition-colors flex-shrink-0" style="transition-delay:0.2s">
+            <span data-i18n="news.viewall">All publications</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- 1 col mobile, 2 col sm, 3 col md+ -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
+
+          <article class="reveal group cursor-pointer" style="transition-delay:0.1s">
+            <div class="bg-white rounded-2xl h-full flex flex-col overflow-hidden transition-shadow duration-300 group-hover:shadow-xl" style="box-shadow: 0 1px 4px rgba(62,0,15,0.08), 0 0 0 0.5px rgba(62,0,15,0.08);">
+              <div class="w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style="height:180px; background:#FAF8F5; border-bottom: 1px solid rgba(62,0,15,0.06);">
+              <svg width="100%" height="100%" viewBox="0 0 680 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <line x1="40" y1="240" x2="640" y2="240" stroke="#3E000F" stroke-width="0.4" opacity="0.12"/>
+                <line x1="40" y1="195" x2="640" y2="195" stroke="#3E000F" stroke-width="0.4" opacity="0.12"/>
+                <line x1="40" y1="150" x2="640" y2="150" stroke="#3E000F" stroke-width="0.4" opacity="0.12"/>
+                <line x1="40" y1="105" x2="640" y2="105" stroke="#3E000F" stroke-width="0.4" opacity="0.12"/>
+                <line x1="40" y1="60"  x2="640" y2="60"  stroke="#3E000F" stroke-width="0.4" opacity="0.12"/>
+                <rect x="60"  y="188" width="44" height="52"  fill="#3E000F" opacity="0.18" rx="2"/>
+                <rect x="130" y="168" width="44" height="72"  fill="#3E000F" opacity="0.22" rx="2"/>
+                <rect x="200" y="182" width="44" height="58"  fill="#3E000F" opacity="0.18" rx="2"/>
+                <rect x="270" y="148" width="44" height="92"  fill="#3E000F" opacity="0.28" rx="2"/>
+                <rect x="340" y="128" width="44" height="112" fill="#3E000F" opacity="0.34" rx="2"/>
+                <rect x="410" y="105" width="44" height="135" fill="#3E000F" opacity="0.42" rx="2"/>
+                <rect x="480" y="80"  width="44" height="160" fill="#3E000F" opacity="0.55" rx="2"/>
+                <rect x="550" y="50"  width="44" height="190" fill="#3E000F" opacity="0.72" rx="2"/>
+                <polyline points="82,186 152,165 222,179 292,145 362,125 432,101 502,76 572,46" fill="none" stroke="#CFD11A" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <circle cx="82"  cy="186" r="4" fill="#CFD11A"/>
+                <circle cx="152" cy="165" r="4" fill="#CFD11A"/>
+                <circle cx="222" cy="179" r="4" fill="#CFD11A"/>
+                <circle cx="292" cy="145" r="4" fill="#CFD11A"/>
+                <circle cx="362" cy="125" r="4" fill="#CFD11A"/>
+                <circle cx="432" cy="101" r="4" fill="#CFD11A"/>
+                <circle cx="502" cy="76"  r="4" fill="#CFD11A"/>
+                <circle cx="572" cy="46"  r="6" fill="#CFD11A"/>
+                <text x="572" y="36" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#3E000F" opacity="0.45" font-style="italic">+38.4%</text>
+              </svg>
+            </div>
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+              <span class="text-xs font-medium tracking-widest uppercase text-olive mb-4" data-i18n="art1.tag">Israeli Market</span>
+              <h3 class="font-display text-xl md:text-2xl font-light text-bordeaux leading-snug mb-4 group-hover:text-bordeaux/80 transition-colors" data-i18n="art1.title">
+                Tel Aviv Stock Exchange: opportunities and cautions for the second half of 2025.
+              </h3>
+              <p class="text-sm font-light leading-relaxed text-bordeaux/65 flex-grow mb-5" data-i18n="art1.body">
+                Against a complex regional geopolitical backdrop, Israeli equity markets are displaying remarkable resilience. Analysis of key sectors and appropriate hedging strategies.
+              </p>
+              <div class="flex items-center justify-between pt-4 border-t border-bordeaux/10">
+                <span class="text-xs text-olive" data-i18n="art1.date">18 March 2026</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-olive group-hover:text-bordeaux group-hover:translate-x-1 transition-all"></i>
+              </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal group cursor-pointer" style="transition-delay:0.2s">
+            <div class="bg-white rounded-2xl h-full flex flex-col overflow-hidden transition-shadow duration-300 group-hover:shadow-lg">
+              <div class="w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style="height:180px; background:#ffffff;">
+              <svg width="100%" height="100%" viewBox="0 0 680 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <g opacity="0.055" stroke="#3E000F" stroke-width="0.5">
+                  <line x1="0" y1="50" x2="680" y2="50"/><line x1="0" y1="100" x2="680" y2="100"/>
+                  <line x1="0" y1="150" x2="680" y2="150"/><line x1="0" y1="200" x2="680" y2="200"/>
+                  <line x1="0" y1="250" x2="680" y2="250"/>
+                  <line x1="80" y1="0" x2="80" y2="300"/><line x1="160" y1="0" x2="160" y2="300"/>
+                  <line x1="240" y1="0" x2="240" y2="300"/><line x1="320" y1="0" x2="320" y2="300"/>
+                  <line x1="400" y1="0" x2="400" y2="300"/><line x1="480" y1="0" x2="480" y2="300"/>
+                  <line x1="560" y1="0" x2="560" y2="300"/><line x1="640" y1="0" x2="640" y2="300"/>
+                </g>
+                <rect x="60"  y="195" width="560" height="52" fill="#3E000F" opacity="0.05" rx="3"/>
+                <rect x="80"  y="162" width="520" height="50" fill="#3E000F" opacity="0.08" rx="3"/>
+                <rect x="108" y="132" width="464" height="48" fill="#3E000F" opacity="0.12" rx="3"/>
+                <rect x="145" y="104" width="390" height="46" fill="#3E000F" opacity="0.18" rx="3"/>
+                <rect x="192" y="79"  width="296" height="43" fill="#3E000F" opacity="0.26" rx="3"/>
+                <rect x="250" y="57"  width="180" height="40" fill="#3E000F" opacity="0.38" rx="3"/>
+                <rect x="305" y="38"  width="70"  height="35" fill="#3E000F" opacity="0.58" rx="3"/>
+                <rect x="305" y="38" width="3" height="35" fill="#CFD11A" rx="1"/>
+                <rect x="192" y="79" width="3" height="43" fill="#CFD11A" opacity="0.7" rx="1"/>
+                <line x1="60" y1="252" x2="620" y2="252" stroke="#CFD11A" stroke-width="1.2" opacity="0.5"/>
+                <circle cx="340" cy="55" r="5" fill="#CFD11A"/>
+              </svg>
+            </div>
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+              <span class="text-xs font-medium tracking-widest uppercase text-olive mb-4" data-i18n="art2.tag">Tax & Structuring</span>
+              <h3 class="font-display text-xl md:text-2xl font-light text-bordeaux leading-snug mb-4 group-hover:text-bordeaux/80 transition-colors" data-i18n="art2.title">
+                Non-resident taxation in Israel: what changes in 2025 and how to prepare.
+              </h3>
+              <p class="text-sm font-light leading-relaxed text-bordeaux/65 flex-grow mb-5" data-i18n="art2.body">
+                Recent Israeli tax reforms significantly impact the wealth strategies of foreign investors and olim hadachim. Breakdown and practical recommendations.
+              </p>
+              <div class="flex items-center justify-between pt-4 border-t border-bordeaux/10">
+                <span class="text-xs text-olive" data-i18n="art2.date">4 February 2026</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-olive group-hover:text-bordeaux group-hover:translate-x-1 transition-all"></i>
+              </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal group cursor-pointer sm:col-span-2 md:col-span-1" style="transition-delay:0.3s">
+            <div class="bg-white rounded-2xl h-full flex flex-col overflow-hidden transition-shadow duration-300 group-hover:shadow-lg">
+              <div class="w-full flex-shrink-0 overflow-hidden rounded-t-2xl" style="height:180px; background:#3E000F;">
+              <svg width="100%" height="100%" viewBox="0 0 680 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <ellipse cx="340" cy="150" rx="280" ry="110" fill="none" stroke="white" stroke-width="0.4" opacity="0.07"/>
+                <ellipse cx="340" cy="150" rx="180" ry="110" fill="none" stroke="white" stroke-width="0.4" opacity="0.07"/>
+                <ellipse cx="340" cy="150" rx="80"  ry="110" fill="none" stroke="white" stroke-width="0.4" opacity="0.07"/>
+                <line x1="340" y1="20"  x2="340" y2="280" stroke="white" stroke-width="0.4" opacity="0.07"/>
+                <line x1="50"  y1="150" x2="630" y2="150" stroke="white" stroke-width="0.4" opacity="0.07"/>
+                <path d="M 118 178 Q 210 70 338 115"  fill="none" stroke="white" stroke-width="0.8" opacity="0.22"/>
+                <path d="M 338 115 Q 430 55 538 148" fill="none" stroke="white" stroke-width="0.8" opacity="0.22"/>
+                <path d="M 118 178 Q 280 245 458 210" fill="none" stroke="white" stroke-width="0.8" opacity="0.18"/>
+                <path d="M 538 148 Q 558 228 458 210" fill="none" stroke="white" stroke-width="0.8" opacity="0.18"/>
+                <path d="M 118 178 Q 205 270 298 240" fill="none" stroke="#CFD11A" stroke-width="1" opacity="0.4"/>
+                <g fill="white" opacity="0.1">
+                  <circle cx="80"  cy="105" r="1.5"/><circle cx="108" cy="92"  r="1.5"/>
+                  <circle cx="138" cy="102" r="1.5"/><circle cx="168" cy="86"  r="1.5"/>
+                  <circle cx="198" cy="96"  r="1.5"/><circle cx="228" cy="82"  r="1.5"/>
+                  <circle cx="258" cy="100" r="1.5"/><circle cx="288" cy="88"  r="1.5"/>
+                  <circle cx="318" cy="78"  r="1.5"/><circle cx="350" cy="92"  r="1.5"/>
+                  <circle cx="382" cy="84"  r="1.5"/><circle cx="414" cy="96"  r="1.5"/>
+                  <circle cx="444" cy="86"  r="1.5"/><circle cx="476" cy="102" r="1.5"/>
+                  <circle cx="508" cy="93"  r="1.5"/><circle cx="538" cy="108" r="1.5"/>
+                  <circle cx="568" cy="98"  r="1.5"/><circle cx="596" cy="112" r="1.5"/>
+                  <circle cx="95"  cy="128" r="1.5"/><circle cx="123" cy="122" r="1.5"/>
+                  <circle cx="152" cy="135" r="1.5"/><circle cx="182" cy="118" r="1.5"/>
+                  <circle cx="368" cy="125" r="1.5"/><circle cx="398" cy="116" r="1.5"/>
+                  <circle cx="428" cy="130" r="1.5"/><circle cx="456" cy="122" r="1.5"/>
+                  <circle cx="488" cy="136" r="1.5"/><circle cx="518" cy="128" r="1.5"/>
+                  <circle cx="548" cy="140" r="1.5"/><circle cx="576" cy="130" r="1.5"/>
+                </g>
+                <circle cx="298" cy="240" r="5"   fill="white" opacity="0.35"/>
+                <circle cx="118" cy="178" r="7"   fill="#CFD11A"/>
+                <circle cx="338" cy="115" r="9"   fill="#CFD11A"/>
+                <circle cx="538" cy="148" r="7"   fill="#CFD11A"/>
+                <circle cx="458" cy="210" r="6"   fill="#CFD11A" opacity="0.8"/>
+                <circle cx="298" cy="240" r="5.5" fill="#CFD11A" opacity="0.7"/>
+                <circle cx="338" cy="115" r="16" fill="none" stroke="#CFD11A" stroke-width="1" opacity="0.28"/>
+                <circle cx="338" cy="115" r="25" fill="none" stroke="#CFD11A" stroke-width="0.5" opacity="0.12"/>
+              </svg>
+            </div>
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+              <span class="text-xs font-medium tracking-widest uppercase text-olive mb-4" data-i18n="art3.tag">Global Strategy</span>
+              <h3 class="font-display text-xl md:text-2xl font-light text-bordeaux leading-snug mb-4 group-hover:text-bordeaux/80 transition-colors" data-i18n="art3.title">
+                International diversification: building a resilient portfolio from Israel.
+              </h3>
+              <p class="text-sm font-light leading-relaxed text-bordeaux/65 flex-grow mb-5" data-i18n="art3.body">
+                In the face of global uncertainty, geographical and asset-class diversification is no longer a luxury but a necessity. Our convictions for the next twelve months.
+              </p>
+              <div class="flex items-center justify-between pt-4 border-t border-bordeaux/10">
+                <span class="text-xs text-olive" data-i18n="art3.date">12 January 2026</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-olive group-hover:text-bordeaux group-hover:translate-x-1 transition-all"></i>
+              </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         L'ÉQUIPE
+    ══════════════════════════════════════════════════════ -->
+    <section id="equipe" class="py-16 md:py-28 lg:py-36 px-6 lg:px-8" style="background-color:#F9F5EF;">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- ── En-tête de section ─────────────────────────────── -->
+        <div class="reveal flex items-center gap-3 mb-5">
+          <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+          <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="team.eyebrow">The People of Sandor</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16 md:mb-24">
+          <h2 class="reveal font-display text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-light text-bordeaux leading-[1.06]" style="transition-delay:0.1s" data-i18n-html="team.title">
+            Our <em>Team.</em>
+          </h2>
+          <p class="reveal text-sm font-light leading-relaxed text-bordeaux/60 max-w-xs" style="transition-delay:0.15s" data-i18n="team.subtitle">
+            Complementary expertise in service of a single vision: your wealth.
+          </p>
+        </div>
+
+        <!-- ── NIVEAU 1 : Sandrine Houri-Aharon ──────────────── -->
+        <div class="reveal mb-20 md:mb-28" style="transition-delay:0.1s">
+          <div class="flex flex-col lg:grid gap-10 lg:gap-16 items-stretch" style="grid-template-columns: 3fr 2fr;">
+
+            <div class="relative group" style="border-top: 2px solid #CFD11A;">
+              <div class="relative w-full aspect-[2/3] md:aspect-auto md:h-full rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="assets/team-sandrine.webp"
+                  alt="Sandrine Houri-Aharon"
+                  class="absolute inset-0 w-full h-full object-cover object-top md:relative md:object-center transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              
+              <div class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-bordeaux/40 to-transparent pointer-events-none rounded-b-3xl"></div>
+            </div>
+
+            <!-- Bloc texte dirigeante -->
+            <div class="flex flex-col justify-center py-2 lg:py-8">
+              <div class="flex items-center gap-2.5 mb-7">
+                <span class="block w-6 h-px bg-citron flex-shrink-0"></span>
+                <span class="text-xs font-medium tracking-widest uppercase text-olive" data-i18n="team.dir.badge">Executive Leadership</span>
+              </div>
+
+              <h3 class="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-bordeaux leading-[1.05] mb-3">
+                Sandrine<br />Houri-Aharon
+              </h3>
+
+              <p class="text-xs font-medium uppercase text-bordeaux/45 mb-8"
+                 style="font-family:'Inter',sans-serif; letter-spacing:0.12em; line-height:1.6;" data-i18n="team.dir.role">
+                Founder, CEO &amp; Senior Asset Manager
+              </p>
+
+              <div class="w-8 h-px bg-citron mb-7"></div>
+
+              <p class="text-sm font-light leading-[1.95] mb-8" style="color: #374151;" data-i18n="team.dir.bio">
+                With over two decades of experience at the heart of Israeli and international financial markets, Sandrine Houri-Aharon embodies the vision of Sandor Investments Management: combining the analytical precision of institutional management with the warmth of a truly personal advisory relationship. As the firm's founder, she oversees all wealth strategies and guarantees the absolute independence of counsel.
+              </p>
+
+              <div class="flex flex-wrap gap-8 pt-7 border-t border-bordeaux/10">
+                <div>
+                  <p class="font-display text-2xl font-light text-bordeaux mb-0.5" data-i18n="team.dir.stat1.value">20+</p>
+                  <p class="text-xs font-medium tracking-widest uppercase text-olive" style="font-family:'Inter',sans-serif;" data-i18n="team.dir.stat1.label">Years of experience</p>
+                </div>
+                <div>
+                  <p class="font-display text-2xl font-light text-bordeaux mb-0.5" data-i18n="team.dir.stat2.value">Authorized</p>
+                  <p class="text-xs font-medium tracking-widest uppercase text-olive" style="font-family:'Inter',sans-serif;" data-i18n="team.dir.stat2.label">Regulated in Israel</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="reveal flex items-center gap-6 mb-16 md:mb-20" style="transition-delay:0.05s">
+          <div class="flex-1 h-px" style="background:rgba(62,0,15,0.12);"></div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <span class="block w-4 h-px bg-citron"></span>
+            <span class="text-xs font-medium tracking-widest uppercase text-bordeaux/50" style="font-family:'Inter',sans-serif;" data-i18n="team.collaborators">Our Colleagues</span>
+            <span class="block w-4 h-px bg-citron"></span>
+          </div>
+          <div class="flex-1 h-px" style="background:rgba(62,0,15,0.12);"></div>
+        </div>
+
+        <!-- ── NIVEAU 2 : Rébeccah Shimouni-Elbaz ────────────── -->
+        <div class="reveal mb-16 md:mb-20 group" style="transition-delay:0.1s">
+          <div class="flex flex-col md:flex-row items-stretch overflow-hidden rounded-2xl shadow-lg" style="border-top: 2px solid #CFD11A; background-color:#F9F5EF;">
+
+            <!-- Photo — proportion portrait à gauche -->
+            <div class="w-full md:w-80 lg:w-96 flex-shrink-0 overflow-hidden">
+              <img
+                src="assets/team-rebeccah.webp"
+                alt="Rébeccah Shimouni-Elbaz — Vice President, Asset Manager"
+                class="w-full h-80 md:h-full object-cover object-[50%_8%] md:object-center transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+
+            <!-- Texte -->
+            <div class="flex flex-col justify-center px-8 lg:px-12 py-8 md:py-10 flex-grow" style="border-left: 1px solid rgba(62,0,15,0.07);">
+              <div class="flex items-center gap-3 mb-5">
+                <span class="block w-6 h-px bg-citron flex-shrink-0"></span>
+                <span class="text-xs font-medium tracking-widest uppercase text-olive" style="font-family:'Inter',sans-serif;" data-i18n="team.rebeccah.role">Vice President, Asset Manager</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl lg:text-5xl font-light text-bordeaux leading-tight mb-4">
+                Rébeccah<br />Shimouni-Elbaz
+              </h3>
+              <div class="w-8 h-px bg-citron mb-6"></div>
+              <p class="text-sm font-light leading-[1.9] max-w-lg" style="color:#374151;" data-i18n="team.rebeccah.bio">
+                As Vice President and Asset Manager, Rébeccah oversees client portfolio strategies with a hands-on, personalised approach. Her command of both local Israeli regulations and international financial markets makes her an invaluable partner for clients navigating complex wealth landscapes.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── NIVEAU 3 : Grille des 6 collaborateurs (3-3) ──────── -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-x-10 md:gap-y-16">
+
+          <!-- Membre 2 : Rudy Bougard -->
+          <div class="reveal group" style="transition-delay:0.05s">
+            <div class="overflow-hidden rounded-xl mb-5 shadow-sm aspect-[2/3]" style="border-top: 1px solid rgba(207,209,26,0.4);">
+              <img
+                src="assets/team-rudy.webp"
+                alt="Rudy Bougard — Investment Marketer"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div>
+              <p class="font-display text-xl font-semibold tracking-wider text-bordeaux mb-1.5 leading-snug">
+                Rudy Bougard
+              </p>
+              <p class="text-xs font-light text-bordeaux/50 uppercase leading-relaxed" style="font-family:'Inter',sans-serif; letter-spacing:0.09em;" data-i18n="team.rudy.role">
+                Investment Marketer
+              </p>
+            </div>
+          </div>
+
+          <!-- Membre 4 : Liram Babay -->
+          <div class="reveal group" style="transition-delay:0.15s">
+            <div class="overflow-hidden rounded-xl mb-5 shadow-sm aspect-[2/3]" style="border-top: 1px solid rgba(207,209,26,0.4);">
+              <img
+                src="assets/team-liram.webp"
+                alt="Liram Babay — Asset Manager and Director of Compliance and Regulatory Affairs"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div>
+              <p class="font-display text-xl font-semibold tracking-wider text-bordeaux mb-1.5 leading-snug">
+                Liram Babay
+              </p>
+              <p class="text-xs font-light text-bordeaux/50 uppercase leading-relaxed" style="font-family:'Inter',sans-serif; letter-spacing:0.09em;" data-i18n="team.liram.role">
+                Asset Manager &amp; Director of Compliance<br />and Regulatory Affairs
+              </p>
+            </div>
+          </div>
+
+          <!-- Membre 5 : Moti Aharon -->
+          <div class="reveal group" style="transition-delay:0.05s">
+            <div class="overflow-hidden rounded-xl mb-5 shadow-sm aspect-[2/3]" style="border-top: 1px solid rgba(207,209,26,0.4);">
+              <img
+                src="assets/team-moti.webp"
+                alt="Moti Aharon — Real Estate Department Manager"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div>
+              <p class="font-display text-xl font-semibold tracking-wider text-bordeaux mb-1.5 leading-snug">
+                Moti Aharon
+              </p>
+              <p class="text-xs font-light text-bordeaux/50 uppercase leading-relaxed" style="font-family:'Inter',sans-serif; letter-spacing:0.09em;" data-i18n="team.moti.role">
+                Real Estate Department Manager
+              </p>
+            </div>
+          </div>
+
+          <!-- Membre 6 : Alon Taieb -->
+          <div class="reveal group" style="transition-delay:0.10s">
+            <div class="overflow-hidden rounded-xl mb-5 shadow-sm aspect-[2/3]" style="border-top: 1px solid rgba(207,209,26,0.4);">
+              <img
+                src="assets/team-alon.webp"
+                alt="Alon Taieb — Business Development Manager"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div>
+              <p class="font-display text-xl font-semibold tracking-wider text-bordeaux mb-1.5 leading-snug">
+                Alon Taieb
+              </p>
+              <p class="text-xs font-light text-bordeaux/50 uppercase leading-relaxed" style="font-family:'Inter',sans-serif; letter-spacing:0.09em;" data-i18n="team.alon.role">
+                Business Development Manager
+              </p>
+            </div>
+          </div>
+
+          <!-- Membre 7 : Delphine Bachor -->
+          <div class="reveal group" style="transition-delay:0.15s">
+            <div class="overflow-hidden rounded-xl mb-5 shadow-sm aspect-[2/3]" style="border-top: 1px solid rgba(207,209,26,0.4);">
+              <img
+                src="assets/team-delphine.webp"
+                alt="Delphine Bachor — Assistant to the CEO / Administrative Manager"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div>
+              <p class="font-display text-xl font-semibold tracking-wider text-bordeaux mb-1.5 leading-snug">
+                Delphine Bachor
+              </p>
+              <p class="text-xs font-light text-bordeaux/50 uppercase leading-relaxed" style="font-family:'Inter',sans-serif; letter-spacing:0.09em;" data-i18n="team.delphine.role">
+                Assistant to the CEO &amp; Administrative Manager
+              </p>
+            </div>
+          </div>
+
+          <!-- Membre 8 : Meir Haberman — carte standard -->
+          <div class="reveal group" style="transition-delay:0.15s">
+            <div class="overflow-hidden rounded-xl mb-5 shadow-sm aspect-[2/3]" style="border-top: 1px solid rgba(207,209,26,0.4);">
+              <img
+                src="assets/team-meir.webp"
+                alt="Meir Haberman — Analyst"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div>
+              <p class="font-display text-xl font-semibold tracking-wider text-bordeaux mb-1.5 leading-snug">
+                Meir Haberman
+              </p>
+              <p class="text-xs font-light text-bordeaux/50 uppercase leading-relaxed" style="font-family:'Inter',sans-serif; letter-spacing:0.09em;" data-i18n="team.meir.role">
+                Analyst
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         CONTACT
+    ══════════════════════════════════════════════════════ -->
+    <section id="contact" class="py-16 md:py-28 lg:py-36 px-6 lg:px-8 bg-bordeaux">
+      <div class="max-w-7xl mx-auto">
+
+        <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-28 gap-12">
+
+          <!-- Left: intro -->
+          <div>
+            <div class="reveal flex items-center gap-3 mb-5">
+              <span class="block w-6 md:w-8 h-px bg-citron flex-shrink-0"></span>
+              <span class="text-xs font-medium tracking-widest uppercase text-white/50" data-i18n="contact.eyebrow">Private Wealth Audit</span>
+            </div>
+
+            <h2 class="reveal font-display text-3xl sm:text-4xl lg:text-5xl xl:text-[3.5rem] font-light text-white leading-[1.1] mb-7" style="transition-delay:0.1s" data-i18n-html="contact.title">
+              A confidential<br />
+              <em>conversation</em> starts here.
+            </h2>
+
+            <p class="reveal text-sm font-light leading-relaxed text-white/65 max-w-sm mb-10" style="transition-delay:0.2s" data-i18n="contact.subtitle">
+              We offer an initial wealth diagnostic meeting, with no commitment and in complete confidence. It is an opportunity to introduce our approach and understand your specific needs.
+            </p>
+
+            <div class="reveal space-y-5" style="transition-delay:0.3s">
+              <div class="flex items-start gap-4">
+                <i data-lucide="map-pin" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                <div>
+                  <p class="text-xs font-medium tracking-wide uppercase text-white/40 mb-1" data-i18n="contact.addr.label">Address</p>
+                  <p class="text-sm font-light text-white/80">85 Medinat ha-Yehudim St, Azrieli Mall<br />Herzliya, 4676670, Israël</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <i data-lucide="phone" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                <div>
+                  <p class="text-xs font-medium tracking-wide uppercase text-white/40 mb-1" data-i18n="contact.tel.label">Phone</p>
+                  <a href="tel:+972722452080" class="text-sm font-light text-white/80 hover:text-white transition-colors">+972 72-245-2080</a>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <i data-lucide="mail" class="w-4 h-4 text-citron mt-0.5 flex-shrink-0"></i>
+                <div>
+                  <p class="text-xs font-medium tracking-wide uppercase text-white/40 mb-1" data-i18n="contact.email.label">Email</p>
+                  <a href="mailto:contact@sandorinvestments.com" class="text-sm font-light text-white/80 hover:text-white transition-colors">contact@sandorinvestments.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Form -->
+          <div class="reveal" style="transition-delay:0.2s">
+            <form id="contact-form" class="space-y-7" novalidate>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                <div>
+                  <label class="block text-xs font-medium tracking-widest uppercase text-white/40 mb-2" data-i18n="form.prenom">First Name</label>
+                  <input type="text" name="prenom" placeholder="Votre prénom" class="form-field" style="border-bottom-color:rgba(255,255,255,0.2);color:#fff;" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium tracking-widest uppercase text-white/40 mb-2" data-i18n="form.nom">Last Name</label>
+                  <input type="text" name="nom" placeholder="Votre nom" class="form-field" style="border-bottom-color:rgba(255,255,255,0.2);color:#fff;" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium tracking-widest uppercase text-white/40 mb-2" data-i18n="form.email.label">Email</label>
+                <input type="email" name="email" placeholder="votre@email.com" class="form-field" style="border-bottom-color:rgba(255,255,255,0.2);color:#fff;" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium tracking-widest uppercase text-white/40 mb-2" data-i18n="form.tel.label">Phone</label>
+                <input type="tel" name="telephone" placeholder="+972 …" class="form-field" style="border-bottom-color:rgba(255,255,255,0.2);color:#fff;" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium tracking-widest uppercase text-white/40 mb-2" data-i18n="form.situation.label">Your wealth profile</label>
+                <select name="situation" class="form-field appearance-none" style="border-bottom-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);background:transparent;">
+                  <option value="" disabled selected style="color:#808F85;background:#3E000F;" data-i18n="form.situation.placeholder">Select your profile</option>
+                  <option value="particulier"   style="background:#3E000F;" data-i18n="form.opt1">Individual / Family</option>
+                  <option value="entrepreneur"  style="background:#3E000F;" data-i18n="form.opt2">Entrepreneur / Executive</option>
+                  <option value="expat"         style="background:#3E000F;" data-i18n="form.opt3">Expatriate / International investor</option>
+                  <option value="olim"          style="background:#3E000F;" data-i18n="form.opt4">Oleh Hadach</option>
+                  <option value="autre"         style="background:#3E000F;" data-i18n="form.opt5">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium tracking-widest uppercase text-white/40 mb-2" data-i18n="form.message.label">Message (optional)</label>
+                <textarea name="message" rows="3" placeholder="Décrivez brièvement votre situation ou vos objectifs…" class="form-field resize-none" style="border-bottom-color:rgba(255,255,255,0.2);color:#fff;"></textarea>
+              </div>
+
+              <button type="submit" class="w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-bordeaux text-sm font-medium tracking-wide rounded-full transition-all duration-250 hover:bg-linen">
+                <span data-i18n="form.submit">Submit my audit request</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 flex-shrink-0"></i>
+              </button>
+
+              <p class="text-xs text-white/35 text-center leading-relaxed" data-i18n="form.privacy">
+                Your data is strictly confidential and will never be shared with third parties.<br class="hidden sm:block" />
+                In accordance with Israeli personal data protection regulations.
+              </p>
+
+            </form>
+
+            <div id="form-success" class="hidden text-center py-16">
+              <i data-lucide="check-circle-2" class="w-12 h-12 text-citron mx-auto mb-6"></i>
+              <p class="font-display text-3xl font-light text-white mb-3" data-i18n="form.success.title">Request received.</p>
+              <p class="text-sm font-light text-white/65" data-i18n="form.success.body">Our team will contact you within 48 working hours to schedule your diagnostic interview.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════ -->
+  <footer class="bg-bordeaux border-t border-white/10 px-6 lg:px-8 py-14 md:py-16">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- 2 col mobile, 4 col md+ -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12 md:mb-16">
+
+        <!-- Brand -->
+        <div class="col-span-2 md:col-span-2">
+          <img src="assets/logo.png" alt="Sandor Investments" class="h-10 w-auto object-contain mb-5 brightness-0 invert" />
+          <p class="text-sm font-light leading-relaxed text-white/55 max-w-xs">
+            <span data-i18n="footer.brand">Independent licensed wealth management firm in Israel. Dedicated to excellence, discretion and the exclusive interest of our clients from Herzliya.</span>
+          </p>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <p class="text-xs font-medium tracking-widest uppercase text-white/30 mb-5" data-i18n="footer.nav.label">Navigation</p>
+          <ul class="space-y-3">
+            <li><a href="#accueil"    class="text-sm font-light text-white/60 hover:text-white transition-colors" data-i18n="nav.home">Home</a></li>
+            <li><a href="#expertises" class="text-sm font-light text-white/60 hover:text-white transition-colors" data-i18n="nav.expertise">Expertise</a></li>
+            <li><a href="#vision"     class="text-sm font-light text-white/60 hover:text-white transition-colors" data-i18n="nav.vision">Our Vision</a></li>
+            <li><a href="#actualites" class="text-sm font-light text-white/60 hover:text-white transition-colors" data-i18n="nav.news">News</a></li>
+            <li><a href="#contact"    class="text-sm font-light text-white/60 hover:text-white transition-colors" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-xs font-medium tracking-widest uppercase text-white/30 mb-5" data-i18n="footer.coords.label">Contact</p>
+          <ul class="space-y-3">
+            <li class="text-sm font-light text-white/60 leading-relaxed">
+              85 Medinat ha-Yehudim St<br />
+              Azrieli Mall, Herzliya<br />
+              4676670, Israël
+            </li>
+            <li>
+              <a href="tel:+972722452080" class="text-sm font-light text-white/60 hover:text-white transition-colors">+972 72-245-2080</a>
+            </li>
+            <li>
+              <a href="mailto:contact@sandorinvestments.com" class="text-sm font-light text-white/60 hover:text-white transition-colors break-all">contact@sandorinvestments.com</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row md:items-start justify-between gap-5">
+        <p class="text-xs font-light text-white/30 leading-relaxed max-w-2xl" data-i18n="footer.legal">
+          Sandor Investments Management is a licensed investment adviser in Israel. The information published on this website is purely informational and does not constitute personalised investment advice, a placement recommendation, or a solicitation to buy or sell securities. All investments carry risk, including loss of capital. Past performance is not indicative of future results.
+        </p>
+        <p class="text-xs font-light text-white/25 md:whitespace-nowrap md:text-right flex-shrink-0" data-i18n-html="footer.copyright">
+          © 2025 Sandor Investments Management.<br />
+          All rights reserved.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════════════════════════════════ -->
+  <script>
+
+    // ══════════════════════════════════════════════════════════
+    //  MULTILINGUAL SYSTEM
+    // ══════════════════════════════════════════════════════════
+    const translations = {
+      fr: {
+        'nav.home':             'Accueil',
+        'nav.expertise':        'Expertises',
+        'nav.vision':           'Notre Vision',
+        'nav.team':             "L'Équipe",
+        'nav.news':             'Actualités',
+        'nav.contact':          'Contact',
+        'nav.cta':              'Prendre Rendez-vous',
+        'menu.espace':          'Espace Client',
+
+        'hero.eyebrow':         'Cabinet agréé · Herzliya, Israël',
+        'hero.badge':           'Cabinet Agréé en Israël',
+        'hero.title':           "L'excellence en gestion<br />de <em class=\"font-light\">patrimoine</em> à Herzliya.",
+        'hero.subtitle':        "Acteur indépendant expert agréé en Israël. Nous bâtissons, optimisons et protégeons vos actifs financiers locaux et internationaux avec une discrétion absolue et une rigueur sur mesure.",
+        'hero.cta1':            'Demander un Audit Privé',
+        'hero.cta2':            'Découvrir nos expertises',
+        'hero.stat1.label':     "Années d'expérience",
+        'hero.stat2.label':     'Conseil indépendant',
+        'hero.stat3.label':     'Continents couverts',
+        'hero.stat4.label':     'Autorité israélienne',
+        'hero.stat4.value':     'Agréé',
+
+        'exp.eyebrow':  'Ce que nous faisons',
+        'exp.title':    "Des expertises<br /><em>taillées</em> sur mesure.",
+        'exp.subtitle': "Chaque situation patrimoniale est unique. Notre approche débute par une écoute approfondie, avant toute recommandation.",
+        'exp.tab1':     'Gestion de Patrimoine',
+        'exp.tab2':     'Entrepreneurs & Sociétés',
+        'exp.tab3':     "Stratégies d'Investissement",
+        'exp.badge':    'Sur-Mesure',
+
+        'tab1.title': "Une vision globale<br />de votre patrimoine.",
+        'tab1.body':  "Nous établissons un bilan patrimonial complet intégrant l'ensemble de vos actifs — immobilier, financier, professionnel et familial — afin de définir une stratégie cohérente, pérenne et parfaitement alignée sur vos objectifs de vie. De la préservation à la transmission, chaque décision est prise avec rigueur et anticipation.",
+        'tab1.li1':   'Bilan patrimonial 360° et diagnostic personnalisé',
+        'tab1.li2':   'Optimisation fiscale locale (ישראלי) et internationale',
+        'tab1.li3':   'Ingénierie successorale et planification de transmission',
+        'tab1.li4':   'Assurance vie, prévoyance et couverture des risques',
+
+        'tab2.title': "L'expertise au service<br />des bâtisseurs.",
+        'tab2.body':  "Fondateurs de startup, chefs d'entreprise établis, entrepreneurs en phase d'exit ou de cession : nous structurons votre patrimoine professionnel et personnel pour que chaque étape de votre croissance soit aussi une opportunité de consolidation. Nous anticipons les enjeux fiscaux et capitalistiques spécifiques au marché israélien.",
+        'tab2.li1':   'Structuration patrimoniale lors des levées de fonds ou exits',
+        'tab2.li2':   "Gestion des stock-options et plans d'actionnariat (ESOP)",
+        'tab2.li3':   'Séparation optimale patrimoine professionnel / personnel',
+        'tab2.li4':   "Conseil en cession, pacte d'associés et holding patrimoniale",
+
+        'tab3.title': "Des convictions fortes,<br />une exécution précise.",
+        'tab3.body':  "Ni produits maison, ni conflits d'intérêts. Notre indépendance totale nous permet de sélectionner les meilleures opportunités d'investissement mondiales — marchés actions, obligataires, alternatifs, private equity et immobilier — en construisant des portefeuilles robustes, diversifiés et calibrés à votre profil de risque réel.",
+        'tab3.li1':   "Allocation d'actifs stratégique et tactique multi-classes",
+        'tab3.li2':   'Sélection rigoureuse de fonds et mandats de gestion tiers',
+        'tab3.li3':   'Accès au private equity, immobilier et actifs alternatifs',
+        'tab3.li4':   'Reporting consolidé et suivi de performance transparent',
+
+        'vis.eyebrow':       'Notre Vision & Notre Équipe',
+        'vis.title':         "La confiance<br />se mérite,<br /><em>elle ne s'affirme pas.</em>",
+        'vis.p1':            "Sandor Investments Management est fondé sur une conviction simple : <strong class=\"font-medium text-bordeaux\">vous méritez un conseil qui n'est redevable qu'à vous.</strong> Pas aux banques, pas aux compagnies d'assurance, pas aux émetteurs de produits. À vous seul.",
+        'vis.p2':            "Sandrine Aharon, fondatrice et directrice générale, a construit ce cabinet après deux décennies passées au cœur des marchés financiers israéliens et internationaux. Sa vision : réconcilier la rigueur analytique de la gestion institutionnelle avec la chaleur et la proximité d'un accompagnement véritablement personnel.",
+        'vis.p3':            "Notre modèle honoraires-only — sans commission sur produits — garantit une transparence totale et un alignement absolu de nos intérêts avec les vôtres. C'est la fondation de toute relation patrimoniale digne de ce nom.",
+        'vis.caption.name':  'Sandrine Aharon',
+        'vis.caption.role':  'Fondatrice & Directrice Générale',
+        'vis.stat1.title':   'Expertise Agréée en Israël',
+        'vis.stat1.body':    "Nous sommes agréés et supervisés par l'autorité de régulation financière israélienne, garantissant le plus haut niveau de conformité et de protection pour nos clients.",
+        'vis.stat2.title':   'Solutions 100% Indépendantes',
+        'vis.stat2.body':    "Aucune rétribution de tiers, aucun produit maison. Chaque recommandation est dictée exclusivement par votre intérêt patrimonial, sélectionnée parmi les meilleures solutions disponibles sur le marché.",
+        'vis.stat3.title':   'Approche Sur-Mesure',
+        'vis.stat3.body':    "Votre situation est unique. Votre stratégie l'est aussi. Nous refusons les solutions standardisées et construisons chaque feuille de route patrimoniale à partir d'une écoute rigoureuse et d'une analyse approfondie.",
+
+        'team.eyebrow':          'Les Femmes & Hommes de Sandor',
+        'team.title':            "Notre <em>Équipe.</em>",
+        'team.subtitle':         "Des expertises complémentaires au service d'une vision unique : votre patrimoine.",
+        'team.dir.badge':        'Direction Générale',
+        'team.dir.role':         'Founder, CEO & Senior Asset Manager',
+        'team.dir.bio':          "Avec plus de deux décennies d'expérience au cœur des marchés financiers israéliens et internationaux, Sandrine Houri-Aharon incarne la vision de Sandor Investments Management : conjuguer la précision analytique de la gestion institutionnelle avec la chaleur d'un accompagnement véritablement personnel. Fondatrice du cabinet, elle supervise l'ensemble des stratégies patrimoniales et garantit l'indépendance absolue du conseil.",
+        'team.dir.stat1.value':  '20+',
+        'team.dir.stat1.label':  "Ans d'expérience",
+        'team.dir.stat2.value':  'Agréée',
+        'team.dir.stat2.label':  'Autorité israélienne',
+        'team.collaborators':    'Nos Collaborateurs',
+        'team.rudy.role':        'Investment Marketer',
+        'team.rebeccah.role':    'Vice-Présidente, Gestionnaire d\'Actifs',
+        'team.rebeccah.bio':    'En tant que Vice-Présidente et Gestionnaire d\'Actifs, Rébeccah supervise les stratégies de portefeuille des clients avec une approche personnalisée et engagée. Sa maîtrise de la réglementation israélienne et des marchés financiers internationaux en fait un partenaire de premier plan pour les clients naviguant dans des environnements patrimoniaux complexes.',
+        'team.liram.role':       'Asset Manager & Director of Compliance and Regulatory Affairs',
+        'team.moti.role':        'Real Estate Department Manager',
+        'team.alon.role':        'Business Development Manager',
+        'team.delphine.role':    'Assistant to the CEO & Administrative Manager',
+        'team.meir.role':        'Analyste',
+        'team.meir.bio':        'Analyste financier spécialisé dans la recherche de marché, le suivi de la performance des portefeuilles et l\'évaluation quantitative des risques. Une approche rigoureuse et méthodique au service des objectifs d\'investissement de chaque client.',
+
+        'news.eyebrow': 'Perspectives & Éclairages',
+        'news.title':   "Nos dernières <em>publications.</em>",
+        'news.viewall': 'Toutes les publications',
+        'art1.tag':     'Marché Israélien',
+        'art1.title':   'Tel Aviv Stock Exchange : opportunités et vigilances pour le second semestre 2025.',
+        'art1.body':    "Dans un contexte géopolitique régional complexe, les marchés actions israéliens affichent une résilience remarquable. Analyse des secteurs porteurs et stratégies de couverture adaptées.",
+        'art1.date':    '18 mars 2026',
+        'art2.tag':     'Fiscalité & Structuration',
+        'art2.title':   "Fiscalité des non-résidents en Israël : ce qui change en 2025 et comment s'y préparer.",
+        'art2.body':    "Les récentes réformes fiscales israéliennes impactent significativement les stratégies patrimoniales des investisseurs étrangers et des olim hadachim. Décryptage et recommandations pratiques.",
+        'art2.date':    '4 février 2026',
+        'art3.tag':     'Stratégie Globale',
+        'art3.title':   "Diversification internationale : construire un portefeuille résilient depuis Israël.",
+        'art3.body':    "Face aux incertitudes mondiales, la diversification géographique et de classes d'actifs n'est plus un luxe mais une nécessité. Nos convictions pour les douze prochains mois.",
+        'art3.date':    '12 janvier 2026',
+
+        'contact.eyebrow':    'Audit Patrimonial Privé',
+        'contact.title':      "Une conversation<br /><em>confidentielle</em> commence ici.",
+        'contact.subtitle':   "Nous offrons un premier entretien de diagnostic patrimonial, sans engagement et en toute confidentialité. C'est l'occasion de vous présenter notre approche et de comprendre vos enjeux spécifiques.",
+        'contact.addr.label': 'Adresse',
+        'contact.tel.label':  'Téléphone',
+        'contact.email.label':'Email',
+        'form.prenom':         'Prénom',
+        'form.nom':            'Nom',
+        'form.email.label':    'Email',
+        'form.tel.label':      'Téléphone',
+        'form.situation.label':'Votre situation patrimoniale',
+        'form.situation.placeholder': 'Sélectionnez votre profil',
+        'form.opt1': 'Particulier / Famille',
+        'form.opt2': 'Entrepreneur / Dirigeant',
+        'form.opt3': 'Expatrié / Investisseur international',
+        'form.opt4': 'Oleh Hadach',
+        'form.opt5': 'Autre',
+        'form.message.label':  'Message (optionnel)',
+        'form.submit':         "Soumettre ma demande d'audit",
+        'form.privacy':        "Vos données sont strictement confidentielles et ne sont jamais partagées avec des tiers. Conformément à la réglementation israélienne sur la protection des données personnelles.",
+        'form.success.title':  'Demande reçue.',
+        'form.success.body':   "Notre équipe vous contactera dans les 48 heures ouvrées pour organiser votre entretien de diagnostic.",
+
+        'footer.brand':        "Cabinet indépendant de gestion de patrimoine agréé en Israël. Dédié à l'excellence, à la discrétion et à l'intérêt exclusif de nos clients depuis Herzliya.",
+        'footer.nav.label':    'Navigation',
+        'footer.coords.label': 'Coordonnées',
+        'footer.legal':        "Sandor Investments Management is a licensed investment adviser in Israel. The information published on this website is purely informational and does not constitute personalised investment advice, a placement recommendation, or a solicitation to buy or sell securities. All investments carry risk, including loss of capital. Past performance is not indicative of future results.",
+        'footer.copyright':    "© 2025 Sandor Investments Management.<br />Tous droits réservés.",
+
+        // ── Services & Approach ──────────────────────────────
+        'svc.eyebrow':  'Nos Offres',
+        'svc.title':    "Services &amp; <em>Approche.</em>",
+        'svc.subtitle': "Un cadre global et indépendant, bâti autour de vos objectifs — ancré localement, orienté mondialement.",
+        'svc.c1.title': 'Nos Services',
+        'svc.c1.body':  "Sandor Investments Management assure une gestion proactive des actifs financiers, comprenant la gestion de portefeuille, la diversification et la protection du capital. Notre engagement repose sur la transparence et l'excellence pour atteindre vos objectifs patrimoniaux.",
+        'svc.c2.title': 'Notre Approche',
+        'svc.c2.body':  "Notre équipe d'experts accompagne chaque client dans une démarche d'écoute approfondie pour cerner ses besoins financiers et ses objectifs, en proposant des conseils et des solutions personnalisées en matière de retraite, de gestion patrimoniale et de planification successorale.",
+        'svc.c3.title': 'Notre Gestion des Risques',
+        'svc.c3.body':  "Nous gérons les risques financiers de nos clients grâce à des outils analytiques avancés et des stratégies de diversification éprouvées, en adaptant continuellement notre gestion aux conditions de marché et aux besoins individuels de chaque investisseur.",
+
+        // ── Entrepreneurs ─────────────────────────────────────
+        'ent.eyebrow':  'Pour les Entrepreneurs & Dirigeants',
+        'ent.title':    "Votre Partenaire Expert<br /><em>pour Entrepreneurs.</em>",
+        'ent.subtitle': "Chez Sandor, nous comprenons les défis singuliers des entrepreneurs et des dirigeants d'entreprise. Vos actifs, personnels comme professionnels, exigent une approche globale et experte. Nous orchestrons une stratégie cohérente qui intègre vos investissements personnels et vos participations au sein de votre société.",
+        'ent.s1.title': "Stratégies d'Investissement",
+        'ent.s1.body':  "Nous visons l'excellence des rendements avec un risque maîtrisé, en proposant un service personnalisé et des solutions sur mesure. Nous identifions les opportunités d'investissement optimales et déployons une stratégie de diversification rigoureuse pour atteindre les objectifs fixés, même en période de forte volatilité.",
+        'ent.s2.title': "Stratégies de Gestion",
+        'ent.s2.body':  "Sandor Investments Management fournit des conseils personnalisés fondés sur une évaluation des risques calibrée pour préserver le capital, respecter le profil de risque et cibler les rendements attendus. Nous ajustons la volatilité du portefeuille en fonction de la tolérance de chaque client et proposons une diversification mondiale pour optimiser les performances et l'efficience patrimoniale.",
+
+        // ── Wealth Transfer ───────────────────────────────────
+        'wt.eyebrow':           'Planification Patrimoniale & Successorale',
+        'wt.title':             "Faciliter la Transmission Sereine<br /><em>du Patrimoine.</em>",
+        'wt.body':              "À mesure que les individus vivent plus longtemps, à travers plusieurs générations, le nombre de personnes composant une famille élargie peut croître considérablement. Sans une planification méticuleuse et rigoureuse, la transmission d'un patrimoine aux bénéficiaires désignés peut devenir un véritable défi. Anticiper ce risque est l'une des principales raisons pour lesquelles les familles font appel à un cabinet de gestion de patrimoine.",
+        'wt.services.label':    'Nos Services Innovants',
+        'wt.services.subtitle': " De nombreux autres avantages découlent du recours à un cabinet de gestion de patrimoine",
+        'wt.p1.title': 'Transparence',
+        'wt.p1.body':  "Mise en place de systèmes garantissant la confiance et une gestion parfaitement adaptée à chaque actif.",
+        'wt.p2.title': 'Harmonisation des Intérêts',
+        'wt.p2.body':  "Introduction d'une gestion d'actifs globale pour harmoniser les revenus à court et à long terme.",
+        'wt.p3.title': 'Potentiel de Rendement Accru',
+        'wt.p3.body':  "Une stratégie patrimoniale centralisée et unique tend à générer de meilleurs rendements tout en réduisant les risques.",
+        'wt.p4.title': 'Séparation des Intérêts',
+        'wt.p4.body':  "Distinction des actifs familiaux personnels de l'activité professionnelle, de l'épargne et du patrimoine d'investissement.",
+        'wt.p5.title': 'Centralisation des Risques',
+        'wt.p5.body':  "Une vision consolidée des investissements familiaux permet au cabinet d'anticiper et de minimiser les risques potentiels.",
+        'wt.p6.title': 'Service Centralisé',
+        'wt.p6.body':  "Un interlocuteur unique et dédié pour l'ensemble de vos questions financières et patrimoniales.",
+
+      },
+
+      en: {
+        'nav.home':             'Home',
+        'nav.expertise':        'Expertise',
+        'nav.vision':           'Our Vision',
+        'nav.team':             'The Team',
+        'nav.news':             'News',
+        'nav.contact':          'Contact',
+        'nav.cta':              'Book a Meeting',
+        'menu.espace':          'Client Portal',
+
+        'hero.eyebrow':         'Licensed Firm · Herzliya, Israel',
+        'hero.badge':           'Licensed Firm in Israel',
+        'hero.title':           "Excellence in wealth<br /><em class=\"font-light\">management</em> in Herzliya.",
+        'hero.subtitle':        "An independent, fully licensed expert in Israel. We build, optimise and protect your local and international financial assets with absolute discretion and bespoke precision.",
+        'hero.cta1':            'Request a Private Audit',
+        'hero.cta2':            'Discover our expertise',
+        'hero.stat1.label':     'Years of experience',
+        'hero.stat2.label':     'Independent advisory',
+        'hero.stat3.label':     'Continents covered',
+        'hero.stat4.label':     'Regulated in Israel',
+        'hero.stat4.value':     'Licensed',
+
+        'exp.eyebrow':  'What we do',
+        'exp.title':    "Expertise <em>crafted</em><br />to measure.",
+        'exp.subtitle': "Every wealth situation is unique. Our approach begins with in-depth listening, before any recommendation.",
+        'exp.tab1':     'Wealth Management',
+        'exp.tab2':     'Entrepreneurs & Corporates',
+        'exp.tab3':     'Investment Strategies',
+        'exp.badge':    'Bespoke',
+
+        'tab1.title': "A comprehensive view<br />of your wealth.",
+        'tab1.body':  "We establish a complete wealth audit covering all your assets — real estate, financial, professional and family — in order to define a coherent, lasting strategy perfectly aligned with your life goals. From preservation to transmission, every decision is made with rigour and foresight.",
+        'tab1.li1':   '360° wealth audit and personalised diagnosis',
+        'tab1.li2':   'Local (ישראלי) and international tax optimisation',
+        'tab1.li3':   'Estate engineering and succession planning',
+        'tab1.li4':   'Life insurance, contingency cover and risk management',
+
+        'tab2.title': "Expertise at the service<br />of builders.",
+        'tab2.body':  "Start-up founders, established CEOs, entrepreneurs at exit or sale stage: we structure your professional and personal wealth so that every stage of your growth is also an opportunity for consolidation. We anticipate the fiscal and capitalistic challenges specific to the Israeli market.",
+        'tab2.li1':   'Wealth structuring during fundraising rounds or exits',
+        'tab2.li2':   'Management of stock-options and employee ownership plans (ESOP)',
+        'tab2.li3':   'Optimal separation of professional and personal assets',
+        'tab2.li4':   'Advisory on disposals, shareholder agreements and patrimonial holding',
+
+        'tab3.title': "Strong convictions,<br />precise execution.",
+        'tab3.body':  "No in-house products, no conflicts of interest. Our total independence allows us to select the best global investment opportunities — equities, fixed income, alternatives, private equity and real estate — building robust, diversified portfolios calibrated to your true risk profile.",
+        'tab3.li1':   'Strategic and tactical multi-asset class allocation',
+        'tab3.li2':   'Rigorous selection of third-party funds and management mandates',
+        'tab3.li3':   'Access to private equity, real estate and alternative assets',
+        'tab3.li4':   'Consolidated reporting and transparent performance monitoring',
+
+        'vis.eyebrow':       'Our Vision & Our Team',
+        'vis.title':         "Trust is earned,<br />not merely <em>proclaimed.</em>",
+        'vis.p1':            "Sandor Investments Management is founded on a simple conviction: <strong class=\"font-medium text-bordeaux\">you deserve advice that is accountable only to you.</strong> Not to banks, not to insurance companies, not to product issuers. To you alone.",
+        'vis.p2':            "Sandrine Aharon, founding CEO, built this firm after two decades at the heart of Israeli and international financial markets. Her vision: to reconcile the analytical rigour of institutional asset management with the warmth and proximity of a truly personal advisory relationship.",
+        'vis.p3':            "Our fees-only model — no product commissions — guarantees full transparency and absolute alignment of our interests with yours. This is the foundation of any wealth relationship worthy of the name.",
+        'vis.caption.name':  'Sandrine Aharon',
+        'vis.caption.role':  'Founder & Chief Executive Officer',
+        'vis.stat1.title':   'Regulated Financial Advisory in Israel',
+        'vis.stat1.body':    "We are authorized and supervised by the Israeli financial regulatory authority, guaranteeing the highest standards of compliance and client protection.",
+        'vis.stat2.title':   '100% Independent Solutions',
+        'vis.stat2.body':    "No third-party remuneration, no in-house products. Every recommendation is dictated solely by your patrimonial interest, selected from the best solutions available on the market.",
+        'vis.stat3.title':   'Bespoke Approach',
+        'vis.stat3.body':    "Your situation is unique. Your strategy is too. We refuse standardised solutions and build every wealth roadmap from rigorous listening and in-depth analysis.",
+
+        'team.eyebrow':          'The People of Sandor',
+        'team.title':            "Our <em>Team.</em>",
+        'team.subtitle':         "Complementary expertise in service of a single vision: your wealth.",
+        'team.dir.badge':        'Executive Leadership',
+        'team.dir.role':         'Founder, CEO & Senior Asset Manager',
+        'team.dir.bio':          "With over two decades of experience at the heart of Israeli and international financial markets, Sandrine Houri-Aharon embodies the vision of Sandor Investments Management: combining the analytical precision of institutional management with the warmth of a truly personal advisory relationship. As the firm's founder, she oversees all wealth strategies and guarantees the absolute independence of counsel.",
+        'team.dir.stat1.value':  '20+',
+        'team.dir.stat1.label':  'Years of experience',
+        'team.dir.stat2.value':  'Authorized',
+        'team.dir.stat2.label':  'Regulated in Israel',
+        'team.collaborators':    'Our Colleagues',
+        'team.rudy.role':        'Investment Marketer',
+        'team.rebeccah.role':    'Vice President, Asset Manager',
+        'team.rebeccah.bio':    'As Vice President and Asset Manager, Rébeccah oversees client portfolio strategies with a hands-on, personalised approach. Her command of both local Israeli regulations and international financial markets makes her an invaluable partner for clients navigating complex wealth landscapes.',
+        'team.liram.role':       'Asset Manager & Director of Compliance and Regulatory Affairs',
+        'team.moti.role':        'Real Estate Department Manager',
+        'team.alon.role':        'Business Development Manager',
+        'team.delphine.role':    'Assistant to the CEO & Administrative Manager',
+        'team.meir.role':        'Analyst',
+        'team.meir.bio':        'Financial analyst with deep expertise in market research, portfolio performance monitoring and quantitative risk assessment. A rigorous and methodical approach in service of each client\'s investment objectives.',
+
+        'news.eyebrow': 'Perspectives & Insights',
+        'news.title':   "Our latest <em>publications.</em>",
+        'news.viewall': 'All publications',
+        'art1.tag':     'Israeli Market',
+        'art1.title':   'Tel Aviv Stock Exchange: opportunities and cautions for the second half of 2025.',
+        'art1.body':    "Against a complex regional geopolitical backdrop, Israeli equity markets are displaying remarkable resilience. Analysis of key sectors and appropriate hedging strategies.",
+        'art1.date':    '18 March 2026',
+        'art2.tag':     'Tax & Structuring',
+        'art2.title':   "Non-resident taxation in Israel: what changes in 2025 and how to prepare.",
+        'art2.body':    "Recent Israeli tax reforms significantly impact the wealth strategies of foreign investors and olim hadachim. Breakdown and practical recommendations.",
+        'art2.date':    '4 February 2026',
+        'art3.tag':     'Global Strategy',
+        'art3.title':   "International diversification: building a resilient portfolio from Israel.",
+        'art3.body':    "In the face of global uncertainty, geographical and asset-class diversification is no longer a luxury but a necessity. Our convictions for the next twelve months.",
+        'art3.date':    '12 January 2026',
+
+        'contact.eyebrow':    'Private Wealth Audit',
+        'contact.title':      "A confidential<br /><em>conversation</em> starts here.",
+        'contact.subtitle':   "We offer an initial wealth diagnostic meeting, with no commitment and in complete confidence. It is an opportunity to introduce our approach and understand your specific needs.",
+        'contact.addr.label': 'Address',
+        'contact.tel.label':  'Phone',
+        'contact.email.label':'Email',
+        'form.prenom':         'First Name',
+        'form.nom':            'Last Name',
+        'form.email.label':    'Email',
+        'form.tel.label':      'Phone',
+        'form.situation.label':'Your wealth profile',
+        'form.situation.placeholder': 'Select your profile',
+        'form.opt1': 'Individual / Family',
+        'form.opt2': 'Entrepreneur / Executive',
+        'form.opt3': 'Expatriate / International investor',
+        'form.opt4': 'Oleh Hadach',
+        'form.opt5': 'Other',
+        'form.message.label':  'Message (optional)',
+        'form.submit':         'Submit my audit request',
+        'form.privacy':        "Your data is strictly confidential and will never be shared with third parties. In accordance with Israeli personal data protection regulations.",
+        'form.success.title':  'Request received.',
+        'form.success.body':   "Our team will contact you within 48 working hours to schedule your diagnostic interview.",
+
+        'footer.brand':        "Independent licensed wealth management firm in Israel. Dedicated to excellence, discretion and the exclusive interest of our clients from Herzliya.",
+        'footer.nav.label':    'Navigation',
+        'footer.coords.label': 'Contact',
+        'footer.legal':        "Sandor Investments Management is a licensed investment adviser in Israel. The information published on this website is purely informational and does not constitute personalised investment advice, a placement recommendation, or a solicitation to buy or sell securities. All investments carry risk, including loss of capital. Past performance is not indicative of future results.",
+        'footer.copyright':    "© 2025 Sandor Investments Management.<br />All rights reserved.",
+
+        // ── Services & Approach ──────────────────────────────
+        'svc.eyebrow':  'What We Offer',
+        'svc.title':    "Services &amp; <em>Approach.</em>",
+        'svc.subtitle': "A comprehensive, independent framework built around your objectives — locally grounded, globally minded.",
+        'svc.c1.title': 'Our Services',
+        'svc.c1.body':  "Sandor Investments Management offers proactive financial asset management, including portfolio management, diversification and capital protection. We focus on transparency and excellence to achieve your financial goals.",
+        'svc.c2.title': 'Our Approach',
+        'svc.c2.body':  "Our team of experts works closely with each client to understand their financial needs and objectives, offering tailored advice and solutions for retirement planning, wealth management and estate structuring.",
+        'svc.c3.title': 'Our Risk Management',
+        'svc.c3.body':  "We manage our clients' financial risks with advanced analytical tools and diversification strategies, continuously adapting our management to market conditions and individual investor needs.",
+
+        // ── Entrepreneurs ─────────────────────────────────────
+        'ent.eyebrow':  'For Entrepreneurs & Business Leaders',
+        'ent.title':    "Your Expert Partner<br /><em>for Entrepreneurs.</em>",
+        'ent.subtitle': "At Sandor, we understand the unique challenges faced by entrepreneurs and business leaders. Your assets, both personal and professional, require a comprehensive, expert approach. We orchestrate a coherent strategy that encompasses your personal investments and your company shareholdings.",
+        'ent.s1.title': "Investment Strategies",
+        'ent.s1.body':  "We aim for excellent returns with controlled risk, offering personalized service and tailor-made solutions. We define optimal investment opportunities and deploy a rigorous diversification strategy to achieve your objectives, even in times of volatility.",
+        'ent.s2.title': "Management Strategies",
+        'ent.s2.body':  "Sandor Investments Management provides personalized advice based on a risk assessment tailored to preserve capital, respect the risk profile, and target expected returns. We adjust portfolio volatility according to client tolerance, and offer global diversification to optimize returns and efficiency.",
+
+        // ── Wealth Transfer ───────────────────────────────────
+        'wt.eyebrow':           'Estate & Succession Planning',
+        'wt.title':             "Facilitating The<br />Smooth Transfer<br /><em>of Wealth.</em>",
+        'wt.body':              "As individuals live longer lives, spanning several generations, the number of people making up an extended family can increase dramatically. Without meticulous and thorough planning, the transfer of an estate to the intended beneficiaries can become a potential minefield. Preventing the risk of this happening is one of the main reasons for families to use a wealth management office.",
+        'wt.services.label':    'Our Innovative Services',
+        'wt.services.subtitle': " There are many other advantages to using the services of a wealth management office",
+        'wt.p1.title': 'Transparency',
+        'wt.p1.body':  "Ensuring that systems are in place to reinforce trust and offer management perfectly adapted to each asset.",
+        'wt.p2.title': 'Harmonizing Interests',
+        'wt.p2.body':  "The introduction of global asset management to harmonize income over the short and long term.",
+        'wt.p3.title': 'Higher Yield Potential',
+        'wt.p3.body':  "Having a single, centralized wealth management strategy tends to generate better returns and reduce risk.",
+        'wt.p4.title': 'Separation of Interests',
+        'wt.p4.body':  "Separate personal family assets from the family business and savings or wealth.",
+        'wt.p5.title': 'Risk Centralization',
+        'wt.p5.body':  "An overview of family investments enables the management office to anticipate and minimize potential risks.",
+        'wt.p6.title': 'Centralized Service',
+        'wt.p6.body':  "A single point of contact for all financial and asset related questions.",
+
+      }
+    };
+
+    // ── switchLanguage ────────────────────────────────────────
+    function switchLanguage(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      // Update all data-i18n (textContent)
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      // Update all data-i18n-html (innerHTML — for titles with <br>, <em>, <strong>)
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+
+      // Update <html lang="">
+      document.documentElement.setAttribute('lang', lang);
+
+      // Update page title
+      document.title = lang === 'fr'
+        ? 'Sandor Investments Management — Gestion de Patrimoine à Herzliya'
+        : 'Sandor Investments Management — Wealth Management in Herzliya';
+
+      // Update all 4 lang switcher buttons (desktop + mobile)
+      ['lang-fr-d','lang-en-d','lang-fr-m','lang-en-m'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        const btnLang = btn.id.includes('-fr-') ? 'fr' : 'en';
+        btn.className = btn.className
+          .replace(/\b(active|inactive)\b/g, '')
+          .trimEnd();
+        btn.className += (btnLang === lang) ? ' active' : ' inactive';
+      });
+
+      // Persist choice
+      try { localStorage.setItem('sandor_lang', lang); } catch(e) {}
+    }
+
+    // ── Init from localStorage on page load (default: EN) ──────
+    (function() {
+      try {
+        const saved = localStorage.getItem('sandor_lang');
+        switchLanguage(saved && translations[saved] ? saved : 'en');
+      } catch(e) {
+        switchLanguage('en');
+      }
+    })();
+
+
+    // ══════════════════════════════════════════════════════════
+    //  CALENDLY POPUP — Booking widget
+    // ══════════════════════════════════════════════════════════
+    // ⚠️ REMPLACER cette URL par votre vraie URL Calendly une fois
+    // votre compte créé. Format : https://calendly.com/votre-identifiant/nom-evenement
+    const CALENDLY_URL = 'https://calendly.com/ucyweb28/30min';
+
+    function openCalendly(e) {
+      if (e) e.preventDefault();
+
+      // Si le script Calendly a bien chargé, ouvrir la vraie popup
+      if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+        window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        return;
+      }
+
+      // Fallback : si Calendly n'a pas encore chargé (réseau lent),
+      // on retente une fois après un court délai, sinon on scrolle au formulaire
+      let attempts = 0;
+      const tryAgain = setInterval(() => {
+        attempts++;
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          clearInterval(tryAgain);
+          window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        } else if (attempts >= 6) {
+          clearInterval(tryAgain);
+          // Fallback final : scroll vers le formulaire de contact
+          const contact = document.getElementById('contact');
+          if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    }
+
+    // ── Init Lucide icons ──────────────────────────────────────
+    lucide.createIcons();
+
+    // ── Navbar scroll effect ──────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    function updateNavbar() {
+      const rule = document.getElementById('navbar-rule');
+      if (window.scrollY > 24) {
+        if (rule) rule.style.opacity = '1';
+      } else {
+        if (rule) rule.style.opacity = '0';
+      }
+    }
+    updateNavbar();
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+
+    // ── Full-screen Mobile Menu ───────────────────────────────
+    const burgerBtn    = document.getElementById('burger-btn');
+    const fsMenu       = document.getElementById('mobile-menu-fs');
+    const fsCloseBtn   = document.getElementById('fs-close-btn');
+    const fsLogoLink   = document.getElementById('fs-logo-link');
+    const fsCTALink    = document.getElementById('fs-cta-link');
+
+    function openMenu() {
+      fsMenu.classList.add('open');
+      fsMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      fsMenu.classList.remove('open');
+      fsMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    burgerBtn.addEventListener('click', openMenu);
+    fsCloseBtn.addEventListener('click', closeMenu);
+    if (fsLogoLink) fsLogoLink.addEventListener('click', closeMenu);
+    if (fsCTALink)  fsCTALink.addEventListener('click', closeMenu);
+
+    // Close on nav link click
+    fsMenu.querySelectorAll('.fs-nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // Language selector
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // ── Scroll reveal ─────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Tab system (smooth opacity fade) ─────────────────────
+    const tabBtns   = document.querySelectorAll('.tab-btn, .tab-btn-dark');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        const nextPanel = document.getElementById('tab-' + target);
+
+        // Fade out active panel
+        tabPanels.forEach(p => {
+          if (p.classList.contains('active')) {
+            p.style.opacity = '0';
+            p.style.transform = 'translateY(6px)';
+            p.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+          }
+        });
+
+        setTimeout(() => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabPanels.forEach(p => {
+            p.classList.remove('active');
+            p.style.opacity = '';
+            p.style.transform = '';
+            p.style.transition = '';
+          });
+
+          btn.classList.add('active');
+          nextPanel.classList.add('active');
+
+          // Fade in new panel
+          nextPanel.style.opacity = '0';
+          nextPanel.style.transform = 'translateY(8px)';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              nextPanel.style.transition = 'opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)';
+              nextPanel.style.opacity = '1';
+              nextPanel.style.transform = 'translateY(0)';
+            });
+          });
+
+          lucide.createIcons();
+        }, 180);
+      });
+    });
+
+    // ── Contact form ──────────────────────────────────────────
+    const form        = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const requiredFields = form.querySelectorAll('input[name="prenom"], input[name="nom"], input[name="email"]');
+      let valid = true;
+
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          valid = false;
+          field.style.borderBottomColor = '#CFD11A';
+          setTimeout(() => {
+            field.style.borderBottomColor = 'rgba(255,255,255,0.2)';
+          }, 2000);
+        }
+      });
+
+      if (!valid) return;
+
+      form.style.opacity = '0';
+      form.style.transition = 'opacity 0.3s';
+      setTimeout(() => {
+        form.classList.add('hidden');
+        formSuccess.classList.remove('hidden');
+        lucide.createIcons();
+      }, 300);
+    });
+
+    // Form field focus styling
+    document.querySelectorAll('#contact-form .form-field').forEach(input => {
+      input.addEventListener('focus', () => {
+        input.style.borderBottomColor = 'rgba(255,255,255,0.7)';
+      });
+      input.addEventListener('blur', () => {
+        input.style.borderBottomColor = 'rgba(255,255,255,0.2)';
+      });
+    });
+  </script>
+
+</body>
+</html>
